@@ -13,4 +13,7 @@ urlpatterns = [
     path('management-hub/add/', views.add_property, name='add_property'),
     path('management-hub/edit/<int:pk>/', views.edit_property, name='edit_property'),
     path('management-hub/delete/<int:pk>/', views.delete_property, name='delete_property'),
+
+# ADD THIS EXACT LINE HERE:
+    path('properties/<int:pk>/', views.property_detail, name='property_detail'),
 ]

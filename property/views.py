@@ -7,11 +7,12 @@ from .forms import PropertyForm  # Import our new form
 from django.shortcuts import get_object_or_404
 
 
-def home(request):
-    # Fetch up to 3 featured properties, newest first
-    featured_properties = Property.objects.filter(is_featured=True).order_by('-created_at')[:3]
-    return render(request, 'home.html', {'featured_properties': featured_properties})
 
+def home(request):
+    # Fetch up to 21 featured properties, newest first
+    # (21 is a great number because it's divisible by 3 for perfect grid rows)
+    featured_properties = Property.objects.filter(is_featured=True).order_by('-created_at')[:21]
+    return render(request, 'home.html', {'featured_properties': featured_properties})
 
 def about(request):
     return render(request, 'about.html')
@@ -151,3 +152,10 @@ def delete_property(request, pk):
         property_obj.delete()
         messages.success(request, "Listing successfully deleted.")
     return redirect('custom_dashboard')
+
+from django.shortcuts import get_object_or_404
+
+def property_detail(request, pk):
+    # Fetch the exact property using its Primary Key (pk/id)
+    property_obj = get_object_or_404(Property, pk=pk)
+    return render(request, 'property_detail.html', {'property': property_obj})
