@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us - JAPAL Property Management{% endblock %}
+
+{% block content %}
+<!-- 1. PAGE HERO SECTION -->
+<section class="relative bg-gray-900 text-white py-24">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 overflow-hidden">
+        <img src="/static/images/worksite.png" alt="JAPAL Worksite" class="w-full h-full object-cover opacity-30">
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 md:px-8 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Building the Future of Real Estate</h1>
+        <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
+            Creating rewarding opportunities and amazing spaces for occupiers, businesses, and communities.
+        </p>
+    </div>
+</section>
+
+<!-- 2. MISSION & VISION SECTION -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            
+            <!-- Image Column -->
+            <div class="rounded-lg overflow-hidden shadow-xl">
+                <img src="/static/images/msingi.png" alt="JAPAL Foundation" class="w-full h-auto object-cover hover:scale-105 transition duration-500">
+            </div>
+
+            <!-- Text Column -->
+            <div class="space-y-8">
+                <!-- Mission -->
+                <div class="bg-gray-50 p-8 border-l-4 border-emerald-600 rounded-r-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-bullseye text-emerald-600"></i> Our Mission
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed">
+                        To lead the future of global real estate by creating rewarding opportunities and amazing spaces for occupiers, businesses, and communities.
+                    </p>
+                </div>
+
+                <!-- Vision -->
+                <div class="bg-gray-50 p-8 border-l-4 border-emerald-600 rounded-r-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-eye text-emerald-600"></i> Our Vision
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed">
+                        To be the leading global real estate service firm, delivering exceptional value for investors and occupiers through innovative technology-driven and sustainable solutions.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- 3. CORE VALUES SECTION -->
+<section class="py-24 bg-gray-950 text-white border-t border-b border-gray-900 relative overflow-hidden">
+    <!-- Subtle Background Ambient Accent -->
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-green-900/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-red-900/5 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+
+        <!-- SECTION HEADER (Split Corporate Layout) -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6 border-b border-gray-900 pb-8">
+            <div>
+                <span class="text-red-500 font-bold text-xs uppercase tracking-widest block mb-2 font-sans">The JAPAL Standard</span>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold tracking-wide">Our Core Values</h2>
+            </div>
+
+        </div>
+
+        <!-- ULTRA-MODERN CARD GRID (Sharp Corners & Hover Triggers) -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+            <!-- 1. Integrity -->
+            <div class="bg-gray-900/60 border border-gray-800 p-6 rounded-none group hover:border-red-600 hover:bg-gray-900 transition-all duration-300 relative">
+                <div class="absolute top-0 left-0 w-full h-[3px] bg-green-600 group-hover:bg-red-600 transition-colors duration-300"></div>
+                <i class="fa-solid fa-shield-halved text-2xl text-green-500 mb-4 block group-hover:text-red-500 group-hover:scale-110 transition-all duration-300"></i>
+                <h3 class="font-sans font-bold text-sm md:text-base text-white tracking-wide uppercase">Integrity</h3>
+            </div>
+
+            <!-- 2. Equality -->
+            <div class="bg-gray-900/60 border border-gray-800 p-6 rounded-none group hover:border-red-600 hover:bg-gray-900 transition-all duration-300 relative">
+                <div class="absolute top-0 left-0 w-full h-[3px] bg-green-600 group-hover:bg-red-600 transition-colors duration-300"></div>
+                <i class="fa-solid fa-scale-balanced text-2xl text-green-500 mb-4 block group-hover:text-red-500 group-hover:scale-110 transition-all duration-300"></i>
+                <h3 class="font-sans font-bold text-sm md:text-base text-white tracking-wide uppercase">Equality</h3>
+            </div>
+
+            <!-- 3. Accountability -->
+            <div class="bg-gray-900/60 border border-gray-800 p-6 rounded-none group hover:border-red-600 hover:bg-gray-900 transition-all duration-300 relative">
+                <div class="absolute top-0 left-0 w-full h-[3px] bg-green-600 group-hover:bg-red-600 transition-colors duration-300"></div>
+                <i class="fa-solid fa-signature text-2xl text-green-500 mb-4 block group-hover:text-red-500 group-hover:scale-110 transition-all duration-300"></i>
+                <h3 class="font-sans font-bold text-sm md:text-base text-white tracking-wide uppercase">Accountability</h3>
+            </div>
+
+            <!-- 4. Team Work -->
+            <div class="bg-gray-900/60 border border-gray-800 p-6 rounded-none group hover:border-red-600 hover:bg-gray-900 transition-all duration-300 relative">
+                <div class="absolute top-0 left-0 w-full h-[3px] bg-green-600 group-hover:bg-red-600 transition-colors duration-300"></div>
+                <i class="fa-solid fa-people-group text-2xl text-green-500 mb-4 block group-hover:text-red-500 group-hover:scale-110 transition-all duration-300"></i>
+                <h3 class="font-sans font-bold text-sm md:text-base text-white tracking-wide uppercase">Team Work</h3>
+            </div>
+
+            <!-- 5. Inclusive -->
+            <div class="bg-gray-900/60 border border-gray-800 p-6 rounded-none group hover:border-red-600 hover:bg-gray-900 transition-all duration-300 relative">
+                <div class="absolute top-0 left-0 w-full h-[3px] bg-green-600 group-hover:bg-red-600 transition-colors duration-300"></div>
+                <i class="fa-solid fa-hands-holding-circle text-2xl text-green-500 mb-4 block group-hover:text-red-500 group-hover:scale-110 transition-all duration-300"></i>
+                <h3 class="font-sans font-bold text-sm md:text-base text-white tracking-wide uppercase">Inclusive</h3>
+            </div>
+
+            <!-- 6. Adaptability -->
+            <div class="bg-gray-900/60 border border-gray-800 p-6 rounded-none group hover:border-red-600 hover:bg-gray-900 transition-all duration-300 relative">
+                <div class="absolute top-0 left-0 w-full h-[3px] bg-green-600 group-hover:bg-red-600 transition-colors duration-300"></div>
+                <i class="fa-solid fa-sliders text-2xl text-green-500 mb-4 block group-hover:text-red-500 group-hover:scale-110 transition-all duration-300"></i>
+                <h3 class="font-sans font-bold text-sm md:text-base text-white tracking-wide uppercase">Adaptability</h3>
+            </div>
+
+            <!-- 7. Visionary -->
+            <div class="bg-gray-900/60 border border-gray-800 p-6 rounded-none group hover:border-red-600 hover:bg-gray-900 transition-all duration-300 relative">
+                <div class="absolute top-0 left-0 w-full h-[3px] bg-green-600 group-hover:bg-red-600 transition-colors duration-300"></div>
+                <i class="fa-solid fa-lightbulb text-2xl text-green-500 mb-4 block group-hover:text-red-500 group-hover:scale-110 transition-all duration-300"></i>
+                <h3 class="font-sans font-bold text-sm md:text-base text-white tracking-wide uppercase">Visionary</h3>
+            </div>
+
+            <!-- 8. Professionalism -->
+            <div class="bg-gray-900/60 border border-gray-800 p-6 rounded-none group hover:border-red-600 hover:bg-gray-900 transition-all duration-300 relative">
+                <div class="absolute top-0 left-0 w-full h-[3px] bg-green-600 group-hover:bg-red-600 transition-colors duration-300"></div>
+                <i class="fa-solid fa-user-tie text-2xl text-green-500 mb-4 block group-hover:text-red-500 group-hover:scale-110 transition-all duration-300"></i>
+                <h3 class="font-sans font-bold text-sm md:text-base text-white tracking-wide uppercase">Professionalism</h3>
+            </div>
+
+            <!-- 9. Service -->
+            <div class="bg-gray-900/60 border border-gray-800 p-6 rounded-none group hover:border-red-600 hover:bg-gray-900 transition-all duration-300 relative">
+                <div class="absolute top-0 left-0 w-full h-[3px] bg-green-600 group-hover:bg-red-600 transition-colors duration-300"></div>
+                <i class="fa-solid fa-hand-holding-heart text-2xl text-green-500 mb-4 block group-hover:text-red-500 group-hover:scale-110 transition-all duration-300"></i>
+                <h3 class="font-sans font-bold text-sm md:text-base text-white tracking-wide uppercase">Service</h3>
+            </div>
+
+            <!-- 10. Partnership -->
+            <div class="bg-gray-900/60 border border-gray-800 p-6 rounded-none group hover:border-red-600 hover:bg-gray-900 transition-all duration-300 relative">
+                <div class="absolute top-0 left-0 w-full h-[3px] bg-green-600 group-hover:bg-red-600 transition-colors duration-300"></div>
+                <i class="fa-solid fa-handshake-angle text-2xl text-green-500 mb-4 block group-hover:text-red-500 group-hover:scale-110 transition-all duration-300"></i>
+                <h3 class="font-sans font-bold text-sm md:text-base text-white tracking-wide uppercase">Partnership</h3>
+            </div>
+
+            <!-- 11. Entrepreneurship -->
+            <div class="bg-gray-900/60 border border-gray-800 p-6 rounded-none group hover:border-red-600 hover:bg-gray-900 transition-all duration-300 relative">
+                <div class="absolute top-0 left-0 w-full h-[3px] bg-green-600 group-hover:bg-red-600 transition-colors duration-300"></div>
+                <i class="fa-solid fa-chart-line text-2xl text-green-500 mb-4 block group-hover:text-red-500 group-hover:scale-110 transition-all duration-300"></i>
+                <h3 class="font-sans font-bold text-sm md:text-base text-white tracking-wide uppercase">Entrepreneurship</h3>
+            </div>
+
+            <!-- 12. Communication & Collaboration -->
+            <div class="bg-gray-900/60 border border-gray-800 p-6 rounded-none group hover:border-red-600 hover:bg-gray-900 transition-all duration-300 relative">
+                <div class="absolute top-0 left-0 w-full h-[3px] bg-green-600 group-hover:bg-red-600 transition-colors duration-300"></div>
+                <i class="fa-solid fa-comments text-2xl text-green-500 mb-4 block group-hover:text-red-500 group-hover:scale-110 transition-all duration-300"></i>
+                <h3 class="font-sans font-bold text-sm md:text-base text-white tracking-wide uppercase">Collaboration</h3>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- 4. PILLARS OF EXCELLENCE SECTION -->
+<section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900">Pillars of Excellence</h2>
+            <p class="text-gray-500 mt-3">The foundation upon which JAPAL operations are built.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Staff -->
+            <div class="bg-white p-6 rounded-lg shadow border-t-4 border-emerald-600 hover:shadow-lg transition">
+                <i class="fa-solid fa-users text-3xl text-emerald-600 mb-4"></i>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Staff</h3>
+                <p class="text-gray-600 text-sm">We will have the highest quality Staff and stay true to our core values.</p>
+            </div>
+            <!-- Customer Satisfaction -->
+            <div class="bg-white p-6 rounded-lg shadow border-t-4 border-emerald-600 hover:shadow-lg transition">
+                <i class="fa-solid fa-face-smile text-3xl text-emerald-600 mb-4"></i>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Customer Satisfaction</h3>
+                <p class="text-gray-600 text-sm">We will strive for truly loyal residents, customers, and team members.</p>
+            </div>
+            <!-- Operational Excellence -->
+            <div class="bg-white p-6 rounded-lg shadow border-t-4 border-emerald-600 hover:shadow-lg transition">
+                <i class="fa-solid fa-gears text-3xl text-emerald-600 mb-4"></i>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Operational Excellence</h3>
+                <p class="text-gray-600 text-sm">We will be known for excellence in creating value at the individual property level and will have a performance metric system to keep ourselves accountable.</p>
+            </div>
+            <!-- Profitability -->
+            <div class="bg-white p-6 rounded-lg shadow border-t-4 border-emerald-600 hover:shadow-lg transition">
+                <i class="fa-solid fa-chart-line text-3xl text-emerald-600 mb-4"></i>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Profitability</h3>
+                <p class="text-gray-600 text-sm">We will be profitable while continually investing in our people and systems.</p>
+            </div>
+            <!-- Growth -->
+            <div class="bg-white p-6 rounded-lg shadow border-t-4 border-emerald-600 hover:shadow-lg transition">
+                <i class="fa-solid fa-arrow-trend-up text-3xl text-emerald-600 mb-4"></i>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Growth</h3>
+                <p class="text-gray-600 text-sm">We will strive to consistently grow our company organically, as well as through selective business combinations. It is our goal to have a presence in all major markets.</p>
+            </div>
+            <!-- Community -->
+            <div class="bg-white p-6 rounded-lg shadow border-t-4 border-emerald-600 hover:shadow-lg transition">
+                <i class="fa-solid fa-handshake-angle text-3xl text-emerald-600 mb-4"></i>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Community</h3>
+                <p class="text-gray-600 text-sm">We will be committed to community and industry service.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 5. OUR TEAM SECTION -->
+<section class="py-16 bg-white border-t border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 md:px-8 text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Meet Our Team</h2>
+        <p class="text-gray-500 mb-12 max-w-2xl mx-auto">The dedicated professionals driving innovation and accountability at JAPAL Property Management.</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+            <!-- Team Member 1 (Directors) -->
+            <div class="group">
+                <div class="w-48 h-48 mx-auto mb-4 overflow-hidden rounded-full border-4 border-gray-50 shadow-md">
+                    <img src="/static/images/directors.png" alt="Board of Directors" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                </div>
+                <h3 class="text-xl font-bold text-gray-900">Board of Directors</h3>
+                <p class="text-emerald-600 font-medium">Executive Leadership</p>
+            </div>
+
+            <!-- Team Member 2 (Lory) -->
+            <div class="group">
+                <div class="w-48 h-48 mx-auto mb-4 overflow-hidden rounded-full border-4 border-gray-50 shadow-md">
+                    <img src="/static/images/lory.png" alt="Lory" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                </div>
+                <h3 class="text-xl font-bold text-gray-900">Lory</h3>
+                <p class="text-emerald-600 font-medium">Management Specialist</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Property - Management Hub</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans pb-24">
+
+    <!-- App-Like Top Navbar -->
+    <header class="bg-gray-900 text-white sticky top-0 z-50 shadow-md">
+        <div class="px-4 py-4 flex items-center gap-4">
+            <!-- Back Button to Dashboard -->
+            <a href="{% url 'custom_dashboard' %}" class="text-gray-400 hover:text-white transition">
+                <i class="fa-solid fa-arrow-left text-xl"></i>
+            </a>
+            <h1 class="font-bold tracking-wide text-lg">Publish New Listing</h1>
+        </div>
+    </header>
+
+    <!-- Main Form Area -->
+    <div class="max-w-3xl mx-auto px-4 py-6">
+
+        <!-- Alerts for Validation Errors -->
+        {% if form.errors %}
+            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded mb-6">
+                <p class="font-bold">Please correct the errors below.</p>
+            </div>
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 space-y-5">
+            <!-- Security Token -->
+            {% csrf_token %}
+
+            <!-- Django Form Loop -->
+            <!-- This automatically generates every field we defined in forms.py -->
+            {% for field in form %}
+                <div class="flex flex-col">
+                    <label class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2" for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                        {% if field.field.required %}
+                            <span class="text-red-500">*</span>
+                        {% endif %}
+                    </label>
+
+                    <!-- Renders the input box with the Tailwind classes we injected in forms.py -->
+                    {{ field }}
+
+                    <!-- Help Text (e.g., "Comma-separated list...") -->
+                    {% if field.help_text %}
+                        <p class="text-[11px] text-gray-400 mt-1 italic">{{ field.help_text }}</p>
+                    {% endif %}
+
+                    <!-- Field-Specific Error Messages -->
+                    {% for error in field.errors %}
+                        <p class="text-xs text-red-500 mt-1 font-semibold">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <!-- Submit Button -->
+            <div class="pt-6 mt-2 border-t border-gray-100">
+                <button type="submit" class="w-full bg-green-600 text-white font-bold py-4 rounded-lg shadow-lg hover:bg-green-700 transition flex justify-center items-center gap-2">
+                    <i class="fa-solid fa-cloud-arrow-up text-lg"></i>
+                    Publish Property
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+</html>

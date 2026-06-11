@@ -1,0 +1,234 @@
+{% extends 'base.html' %}
+
+{% block title %}JAPAL Property Management | Leading Global Real Estate{% endblock %}
+
+{% block extra_head %}
+<!-- Ultra-Modern Custom Animations -->
+<style>
+    /* Slow zoom for hero background */
+    @keyframes slowZoom {
+        0% { transform: scale(1); }
+        100% { transform: scale(1.1); }
+    }
+    .animate-bg-zoom {
+        animation: slowZoom 20s alternate infinite ease-in-out;
+    }
+    
+    /* Reveal animations */
+    @keyframes fadeUpReveal {
+        0% { opacity: 0; transform: translateY(40px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    .reveal-up {
+        animation: fadeUpReveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+
+    /* Glassmorphism utility */
+    .glass-panel {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- 1. IMMERSIVE HERO SECTION -->
+<!-- FIX: Removed overflow-hidden from here so the search bar can float out of the bottom -->
+<section class="relative h-screen min-h-[600px] flex items-center justify-center">
+
+    <!-- Animated Background (overflow-hidden moved here) -->
+    <div class="absolute inset-0 z-0 overflow-hidden">
+        <img src="/static/images/hero1.png" alt="Luxury Real Estate" class="w-full h-full object-cover animate-bg-zoom">
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900/80 via-gray-900/60 to-gray-900/90"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 text-center px-4 w-full max-w-5xl mx-auto mt-16">
+
+        <!-- Added 'font-serif' here to give it the Times New Roman / Georgia formal look -->
+        <h1 class="font-serif text-4xl md:text-5xl font-bold text-white mb-6 leading-snug reveal-up delay-100">
+            Creating Amazing Spaces & <span class="text-red-500">Rewarding Opportunities</span>
+        </h1>
+
+        <!-- Added 'font-serif' here as well for consistency -->
+        <p class="font-serif text-base md:text-lg text-gray-200 mb-12 max-w-2xl mx-auto font-normal reveal-up delay-200">
+            We lead the future of global real estate through innovative, technology-driven management and investment solutions.
+        </p>
+    </div>
+
+    <!-- Floating Glass Search Bar (Bottom of Hero) -->
+    <div class="absolute bottom-0 left-0 w-full transform translate-y-1/2 z-30 px-4 reveal-up delay-300">
+        <div class="max-w-5xl mx-auto glass-panel rounded-2xl shadow-2xl p-4 md:p-6 bg-gray-900/40 border-t border-red-500/30">
+            <form action="{% url 'propertylisting' %}" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                <div class="w-full">
+                    <label class="block text-xs font-bold text-gray-200 uppercase tracking-wide mb-2">Location</label>
+                    <input type="text" name="location" placeholder="e.g. Juja, Nairobi" class="w-full bg-white text-gray-900 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 transition placeholder-gray-500 shadow-inner font-sans">
+                </div>
+                <div class="w-full">
+                    <label class="block text-xs font-bold text-gray-200 uppercase tracking-wide mb-2">Property Type</label>
+                    <select name="type" class="w-full bg-white text-gray-900 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 transition appearance-none shadow-inner font-sans">
+                        <option value="">All Types</option>
+                        <option value="apartment">Apartment</option>
+                        <option value="commercial">Commercial Space</option>
+                        <option value="land">Land</option>
+                    </select>
+                </div>
+                <div class="w-full">
+                    <label class="block text-xs font-bold text-gray-200 uppercase tracking-wide mb-2">Status</label>
+                    <select name="status" class="w-full bg-white text-gray-900 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 transition appearance-none shadow-inner font-sans">
+                        <option value="">Any</option>
+                        <option value="rent">To Let</option>
+                        <option value="sale">For Sale</option>
+                    </select>
+                </div>
+                <div class="w-full">
+                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg shadow-lg transform transition hover:-translate-y-1 font-sans">
+                        <i class="fa-solid fa-magnifying-glass mr-2"></i> Search
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- 2. DUAL-FUNNEL CTA (Directing the User Journey) -->
+<!-- FIX: Increased top padding (pt-40) to ensure content clears the floating search bar -->
+<section class="pt-40 pb-16 bg-gray-50 relative z-20">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+        <div class="grid md:grid-cols-2 gap-8">
+
+            <!-- Owner/Investor Card -->
+            <div class="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition duration-500 bg-white">
+                <div class="absolute inset-0 bg-gray-900/80 z-10 transition duration-500 group-hover:bg-gray-900/90"></div>
+                <img src="/static/images/worksite.png" class="absolute inset-0 w-full h-full object-cover z-0 transform group-hover:scale-110 transition duration-700">
+                <div class="relative z-20 p-10 md:p-14 h-full flex flex-col justify-between min-h-[350px]">
+                    <div>
+                        <i class="fa-solid fa-building-shield text-5xl text-red-500 mb-6"></i>
+                        <h2 class="text-3xl font-bold text-white mb-4">I am a Property Owner</h2>
+                        <p class="text-gray-300 mb-6">Maximize your ROI with our professional tenant management, rent collection, and rigorous property maintenance services.</p>
+                    </div>
+                    <div>
+                        <a href="{% url 'services' %}" class="inline-flex items-center text-white font-bold group-hover:text-red-400 transition">
+                            Explore Management Services <i class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-2 transition"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tenant/Buyer Card -->
+            <div class="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition duration-500 bg-white border-b-4 border-green-600">
+                <!-- Using JAPAL Green for the overlay here -->
+                <div class="absolute inset-0 bg-green-800/80 z-10 transition duration-500 group-hover:bg-green-800/90"></div>
+                <img src="/static/images/msingi.png" class="absolute inset-0 w-full h-full object-cover z-0 transform group-hover:scale-110 transition duration-700">
+                <div class="relative z-20 p-10 md:p-14 h-full flex flex-col justify-between min-h-[350px]">
+                    <div>
+                        <i class="fa-solid fa-key text-5xl text-white mb-6"></i>
+                        <h2 class="text-3xl font-bold text-white mb-4">I am Looking for a Space</h2>
+                        <p class="text-green-100 mb-6">Browse our curated list of premium apartments, commercial spaces, and land tailored to your lifestyle and business needs.</p>
+                    </div>
+                    <div>
+                        <a href="{% url 'propertylisting' %}" class="inline-flex items-center text-white font-bold group-hover:text-red-300 transition">
+                            View Available Properties <i class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-2 transition"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- 3. DEALERS IN: QUICK SERVICE SNAPSHOT -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Comprehensive Solutions</h2>
+            <div class="w-24 h-1 bg-red-600 mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="text-center group">
+                <div class="w-20 h-20 mx-auto bg-gray-50 rounded-2xl flex items-center justify-center mb-4 border border-gray-100 group-hover:bg-red-600 group-hover:shadow-lg transition duration-300 transform group-hover:-translate-y-2">
+                    <i class="fa-solid fa-house-chimney-user text-3xl text-green-600 group-hover:text-white transition"></i>
+                </div>
+                <h3 class="font-bold text-gray-900">Tenant Management</h3>
+            </div>
+            <div class="text-center group">
+                <div class="w-20 h-20 mx-auto bg-gray-50 rounded-2xl flex items-center justify-center mb-4 border border-gray-100 group-hover:bg-red-600 group-hover:shadow-lg transition duration-300 transform group-hover:-translate-y-2">
+                    <i class="fa-solid fa-chart-pie text-3xl text-green-600 group-hover:text-white transition"></i>
+                </div>
+                <h3 class="font-bold text-gray-900">Valuation Services</h3>
+            </div>
+            <div class="text-center group">
+                <div class="w-20 h-20 mx-auto bg-gray-50 rounded-2xl flex items-center justify-center mb-4 border border-gray-100 group-hover:bg-red-600 group-hover:shadow-lg transition duration-300 transform group-hover:-translate-y-2">
+                    <i class="fa-solid fa-helmet-safety text-3xl text-green-600 group-hover:text-white transition"></i>
+                </div>
+                <h3 class="font-bold text-gray-900">Construction & Dev</h3>
+            </div>
+            <div class="text-center group">
+                <div class="w-20 h-20 mx-auto bg-gray-50 rounded-2xl flex items-center justify-center mb-4 border border-gray-100 group-hover:bg-red-600 group-hover:shadow-lg transition duration-300 transform group-hover:-translate-y-2">
+                    <i class="fa-solid fa-file-signature text-3xl text-green-600 group-hover:text-white transition"></i>
+                </div>
+                <h3 class="font-bold text-gray-900">Buying & Selling</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 4. FEATURED EXCLUSIVE LISTINGS -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% for property in featured_properties %}
+                <!-- Dynamic Property Card -->
+                <div class="bg-gray-800 rounded-2xl overflow-hidden group hover:shadow-2xl hover:shadow-red-900/20 transition duration-300 border border-gray-700 flex flex-col">
+                    <div class="relative h-64 overflow-hidden">
+                        {% if property.main_image %}
+                            <img src="{{ property.main_image.url }}" alt="{{ property.title }}" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
+                        {% else %}
+                            <div class="w-full h-full bg-gray-700 flex items-center justify-center"><i class="fa-solid fa-image text-4xl text-gray-500"></i></div>
+                        {% endif %}
+                        <div class="absolute top-4 left-4 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md {% if property.status == 'RENT' %}bg-green-600{% else %}bg-blue-600{% endif %}">
+                            {{ property.get_status_display|upper }}
+                        </div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 truncate text-white">{{ property.title }}</h3>
+                            <p class="text-red-500 font-bold text-lg mb-4">KES {{ property.price }}</p>
+                            <div class="flex items-center text-gray-400 text-sm mb-6 truncate">
+                                <i class="fa-solid fa-location-dot mr-2 text-green-500"></i> {{ property.location }}
+                            </div>
+                        </div>
+                        <a href="#" class="block w-full text-center border border-red-600 text-red-500 font-semibold py-2 rounded-lg hover:bg-red-600 hover:text-white transition duration-300">View Details</a>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-span-3 text-center py-10">
+                    <p class="text-gray-400">No featured properties available at the moment.</p>
+                </div>
+            {% endfor %}
+        </div>
+<!-- 5. NEWSLETTER / FOOTER CTA -->
+<section class="py-24 relative overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <img src="/static/images/worksite.png" class="w-full h-full object-cover opacity-20">
+        <div class="absolute inset-0 bg-green-900/95"></div>
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Stay Ahead in Real Estate</h2>
+        <p class="text-green-100 text-lg mb-10">Subscribe to our newsletter for exclusive property listings, investment insights, and market trends.</p>
+
+        <form class="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
+            <input type="email" placeholder="Enter your email address" required class="flex-grow px-6 py-4 rounded-full focus:outline-none focus:ring-4 focus:ring-red-500/50 shadow-inner text-gray-900">
+            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-full shadow-lg transition duration-300 whitespace-nowrap">
+                Subscribe Now
+            </button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

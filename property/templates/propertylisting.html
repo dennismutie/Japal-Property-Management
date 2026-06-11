@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block title %}Property Listings - JAPAL Property Management{% endblock %}
+
+{% block content %}
+<!-- 1. DIRECTORY HERO SECTION (Compact) -->
+<section class="relative bg-gray-900 py-20 pt-32 md:pt-40">
+    <div class="absolute inset-0 z-0 overflow-hidden opacity-30">
+        <img src="/static/images/hotel1.png" alt="Listings Background" class="w-full h-full object-cover blur-sm">
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-8 text-center">
+        <h1 class="text-3xl md:text-5xl font-bold text-white mb-4">Explore Our Properties</h1>
+        <p class="text-gray-300 max-w-2xl mx-auto">Find the perfect space that matches your lifestyle or investment goals.</p>
+    </div>
+</section>
+
+<!-- 2. IN-PAGE SEARCH & FILTER BAR -->
+<section class="bg-white border-b border-gray-200 shadow-sm relative z-20">
+    <div class="max-w-7xl mx-auto px-4 md:px-8 py-6">
+        <form action="{% url 'propertylisting' %}" method="GET" class="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
+            <div class="md:col-span-1">
+                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Location</label>
+                <input type="text" name="location" value="{{ current_location|default_if_none:'' }}" placeholder="e.g. Juja" class="w-full bg-gray-50 border border-gray-200 text-gray-900 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-red-600 transition">
+            </div>
+            <div class="md:col-span-1">
+                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Type</label>
+                <select name="type" class="w-full bg-gray-50 border border-gray-200 text-gray-900 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-red-600 transition">
+                    <option value="">All Types</option>
+                    <option value="apartment">Apartment</option>
+                    <option value="commercial">Commercial Space</option>
+                    <option value="land">Land</option>
+                    <option value="townhouse">Townhouse</option>
+                </select>
+            </div>
+            <div class="md:col-span-1">
+                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Status</label>
+                <select name="status" class="w-full bg-gray-50 border border-gray-200 text-gray-900 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-red-600 transition">
+                    <option value="">Any Status</option>
+                    <option value="rent">To Let</option>
+                    <option value="sale">For Sale</option>
+                </select>
+            </div>
+            <div class="md:col-span-1">
+                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Sort By</label>
+                <select name="sort" class="w-full bg-gray-50 border border-gray-200 text-gray-900 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-red-600 transition">
+                    <option value="newest">Newest First</option>
+                    <option value="price_low">Price: Low to High</option>
+                    <option value="price_high">Price: High to Low</option>
+                </select>
+            </div>
+            <div class="md:col-span-1">
+                <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded shadow transition">
+                    Update Search
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- 3. PROPERTY GRID -->
+<section class="py-16 bg-gray-50 min-h-[50vh]">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+        
+        <!-- Results Counter -->
+        <div class="mb-8 flex justify-between items-center">
+            <h2 class="text-xl font-bold text-gray-800">Showing <span class="text-red-600">{{ properties|length }}</span> Results</h2>
+        </div>
+
+        {% if properties %}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Django Loop: Generating a card for every property in the database -->
+                {% for property in properties %}
+                    <div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-xl hover:shadow-red-900/10 transition duration-300 border border-gray-100 group flex flex-col">
+                        
+                        <!-- Image & Badges -->
+                        <div class="relative h-64 overflow-hidden">
+                            {% if property.main_image %}
+                                <img src="{{ property.main_image.url }}" alt="{{ property.title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+                            {% else %}
+                                <!-- Fallback if no image uploaded -->
+                                <div class="w-full h-full bg-gray-200 flex items-center justify-center text-gray-400">
+                                    <i class="fa-solid fa-image text-4xl"></i>
+                                </div>
+                            {% endif %}
+                            
+                            <!-- Status Badge (Dynamic Color) -->
+                            <div class="absolute top-4 left-4 text-white text-xs font-bold px-3 py-1 rounded shadow-md 
+                                {% if property.status == 'RENT' %} bg-green-600 {% else %} bg-blue-600 {% endif %}">
+                                {{ property.get_status_display|upper }}
+                            </div>
+
+                            <!-- Featured Badge -->
+                            {% if property.is_featured %}
+                                <div class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded shadow-md">
+                                    <i class="fa-solid fa-star mr-1"></i> FEATURED
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Card Details -->
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2 truncate">{{ property.title }}</h3>
+                                <div class="flex items-center text-gray-500 text-sm mb-4">
+                                    <i class="fa-solid fa-location-dot mr-2 text-green-600"></i> {{ property.location }}
+                                </div>
+                                <p class="text-2xl font-extrabold text-red-600 mb-6">KES {{ property.price }}</p>
+                            </div>
+                            
+                            <!-- Amenities Footer -->
+                            <div>
+                                <div class="flex justify-between items-center py-4 border-t border-gray-100 text-gray-600 text-sm mb-4">
+                                    <span class="flex items-center" title="Bedrooms">
+                                        <i class="fa-solid fa-bed mr-2 text-gray-400"></i> {{ property.bedrooms }}
+                                    </span>
+                                    <span class="flex items-center" title="Bathrooms">
+                                        <i class="fa-solid fa-shower mr-2 text-gray-400"></i> {{ property.bathrooms }}
+                                    </span>
+                                    <span class="flex items-center" title="Property Type">
+                                        <i class="fa-solid fa-building mr-2 text-gray-400"></i> {{ property.get_property_type_display }}
+                                    </span>
+                                </div>
+                                
+                                <!-- TODO: We will link this to the individual property detail view next -->
+                                <a href="#" class="block w-full text-center border-2 border-red-600 text-red-600 font-bold py-2 rounded hover:bg-red-600 hover:text-white transition duration-300">
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <!-- Empty State if no properties match the search -->
+            <div class="text-center py-20 bg-white rounded-lg border border-dashed border-gray-300">
+                <i class="fa-solid fa-house-circle-xmark text-6xl text-gray-300 mb-4"></i>
+                <h3 class="text-2xl font-bold text-gray-700 mb-2">No Properties Found</h3>
+                <p class="text-gray-500 mb-6">We couldn't find any listings matching your specific criteria.</p>
+                <a href="{% url 'propertylisting' %}" class="inline-block bg-red-600 text-white font-bold py-2 px-6 rounded shadow hover:bg-red-700 transition">
+                    Clear Search Filters
+                </a>
+            </div>
+        {% endif %}
+
+    </div>
+</section>
+{% endblock %}

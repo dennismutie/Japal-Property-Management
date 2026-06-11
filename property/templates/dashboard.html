@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Management Hub - JAPAL</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans pb-24">
+
+    <!-- App-Like Top Navbar -->
+    <header class="bg-gray-900 text-white sticky top-0 z-50 shadow-md">
+        <div class="px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-red-600 rounded flex items-center justify-center font-bold">J</div>
+                <h1 class="font-bold tracking-wide">Management Hub</h1>
+            </div>
+            <a href="{% url 'home' %}" class="text-gray-400 hover:text-white text-sm flex items-center gap-2">
+                <i class="fa-solid fa-earth-africa"></i> <span class="hidden md:inline">View Site</span>
+            </a>
+        </div>
+    </header>
+    <!-- Dashboard Success Messages -->
+    {% if messages %}
+        <div class="max-w-5xl mx-auto px-4 mt-4">
+            {% for message in messages %}
+                <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-sm mb-2">
+                    <span class="block sm:inline font-bold">{{ message }}</span>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Quick Stats Overview -->
+    <div class="px-4 pt-6 pb-2 max-w-5xl mx-auto">
+        <div class="grid grid-cols-3 gap-3">
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 text-center">
+                <p class="text-xs text-gray-500 font-bold uppercase mb-1">Total</p>
+                <p class="text-2xl font-black text-gray-900">{{ total_properties }}</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 text-center">
+                <p class="text-xs text-gray-500 font-bold uppercase mb-1">Rentals</p>
+                <p class="text-2xl font-black text-green-600">{{ active_rentals }}</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 text-center">
+                <p class="text-xs text-gray-500 font-bold uppercase mb-1">For Sale</p>
+                <p class="text-2xl font-black text-blue-600">{{ active_sales }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Properties List -->
+    <div class="px-4 py-6 max-w-5xl mx-auto">
+        <div class="flex justify-between items-end mb-4">
+            <h2 class="text-lg font-bold text-gray-800">Your Properties</h2>
+        </div>
+
+        <div class="space-y-4">
+            {% for property in properties %}
+                <!-- Mobile-First List Card -->
+                <div class="bg-white p-3 rounded-xl shadow-sm border border-gray-200 flex items-center gap-4 relative overflow-hidden">
+                    <!-- Color strip for status -->
+                    <div class="absolute left-0 top-0 bottom-0 w-1 {% if property.status == 'RENT' %}bg-green-500{% else %}bg-blue-500{% endif %}"></div>
+
+                    <!-- Thumbnail -->
+                    <div class="w-20 h-20 rounded-lg bg-gray-200 shrink-0 overflow-hidden ml-1">
+                        {% if property.main_image %}
+                            <img src="{{ property.main_image.url }}" class="w-full h-full object-cover">
+                        {% else %}
+                            <i class="fa-solid fa-image text-gray-400 w-full h-full flex items-center justify-center"></i>
+                        {% endif %}
+                    </div>
+
+                    <!-- Info -->
+                  <!-- Info & Action Buttons -->
+                    <div class="flex-grow min-w-0 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-1">
+                                <h3 class="font-bold text-gray-900 text-sm truncate pr-2">{{ property.title }}</h3>
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded {% if property.status == 'RENT' %}bg-green-100 text-green-700{% else %}bg-blue-100 text-blue-700{% endif %}">
+                                    {{ property.status }}
+                                </span>
+                            </div>
+                            <p class="text-xs text-gray-500 truncate mb-1"><i class="fa-solid fa-location-dot mr-1"></i>{{ property.location }}</p>
+                            <p class="text-sm font-black text-red-600">KES {{ property.price }}</p>
+                        </div>
+
+                        <!-- Action Buttons (Edit / Delete) -->
+                        <div class="flex gap-4 mt-2 pt-2 border-t border-gray-100">
+                            <a href="{% url 'edit_property' property.id %}" class="text-blue-600 hover:text-blue-800 text-xs font-bold transition flex items-center gap-1">
+                                <i class="fa-solid fa-pen"></i> Edit
+                            </a>
+                            <!-- Using a form for delete is a secure Django standard -->
+                            <form method="POST" action="{% url 'delete_property' property.id %}" onsubmit="return confirm('Are you sure you want to permanently delete this listing?');" class="inline">
+                                {% csrf_token %}
+                                <button type="submit" class="text-red-600 hover:text-red-800 text-xs font-bold transition flex items-center gap-1">
+                                    <i class="fa-solid fa-trash"></i> Delete
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="text-center py-10 bg-white rounded-xl border border-dashed border-gray-300">
+                    <p class="text-gray-500">No properties posted yet.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Floating Action Button (FAB) to Add Property -->
+    <a href="{% url 'add_property' %}" class="fixed bottom-6 right-6 w-14 h-14 bg-red-600 text-white rounded-full flex items-center justify-center shadow-lg shadow-red-900/40 hover:bg-red-700 hover:scale-105 transition transform z-50">
+        <i class="fa-solid fa-plus text-xl"></i>
+    </a>
+
+</body>
+</html>
