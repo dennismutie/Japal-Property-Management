@@ -1,12 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
-from .models import Property
-from .forms import PropertyForm  # Import our new form
+# Ensure we import both Property AND PropertyImage
+from .models import Property, PropertyImage
+from .forms import PropertyForm
 
-from django.shortcuts import get_object_or_404
 
-
+# ==========================================
+# PUBLIC VIEWS
+# ==========================================
 
 def home(request):
     # Fetch up to 21 featured properties, newest first
@@ -14,43 +16,13 @@ def home(request):
     featured_properties = Property.objects.filter(is_featured=True).order_by('-created_at')[:21]
     return render(request, 'home.html', {'featured_properties': featured_properties})
 
+
 def about(request):
     return render(request, 'about.html')
 
 
 def services(request):
     return render(request, 'services.html')
-
-
-def propertylisting(request):
-    # This will render the propertylisting.html template when we build it
-    return render(request, 'propertylisting.html')
-
-
-def contact(request):
-    if request.method == 'POST':
-        # Capture form data
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        inquiry_type = request.POST.get('inquiry_type')
-        message = request.POST.get('message')
-
-        # TODO: Add logic later to send an email to info@japalproperties.com
-
-        # Flash a success message to the user
-        messages.success(request, f"Thank you, {first_name}! Your message has been sent to JAPAL Property Management.")
-        return redirect('contact')
-
-    return render(request, 'contact.html')
-
-
-
-from .models import Property  # Import your new model
-
-
-
 
 
 def propertylisting(request):
@@ -82,12 +54,36 @@ def propertylisting(request):
     return render(request, 'propertylisting.html', context)
 
 
+def property_detail(request, pk):
+    # Fetch the exact property using its Primary Key (pk/id)
+    property_obj = get_object_or_404(Property, pk=pk)
+
+    # Fetch all extra images associated with this property
+    gallery_images = property_obj.gallery_images.all()
+
+    context = {
+        'property': property_obj,
+        'gallery_images': gallery_images,  # Pass the gallery to the HTML template
+    }
+    return render(request, 'property_detail.html', context)
+
+
 def contact(request):
-    # ... (Keep your existing contact view logic here) ...
     if request.method == 'POST':
+        # Capture form data
         first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        inquiry_type = request.POST.get('inquiry_type')
+        message = request.POST.get('message')
+
+        # TODO: Add logic later to send an email to info@japalproperties.com
+
+        # Flash a success message to the user
         messages.success(request, f"Thank you, {first_name}! Your message has been sent to JAPAL Property Management.")
         return redirect('contact')
+
     return render(request, 'contact.html')
 
 
@@ -110,13 +106,19 @@ def custom_dashboard(request):
 
 
 def add_property(request):
-    """View to handle the posting of a new property."""
+    """View to handle the posting of a new property WITH multiple gallery images."""
     if request.method == 'POST':
-        # request.FILES is crucial for capturing the uploaded image!
         form = PropertyForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            messages.success(request, "Success! New property has been published.")
+            # Save main property but capture it in a variable
+            new_property = form.save()
+
+            # Catch multiple files from the HTML form named 'gallery_images'
+            extra_images = request.FILES.getlist('gallery_images')
+            for image in extra_images:
+                PropertyImage.objects.create(property=new_property, image=image)
+
+            messages.success(request, "Success! New property and gallery images have been published.")
             return redirect('custom_dashboard')
         else:
             messages.error(request, "Please correct the errors below.")
@@ -126,23 +128,27 @@ def add_property(request):
     return render(request, 'add_property.html', {'form': form})
 
 
-
-
 def edit_property(request, pk):
-    """View to edit an existing property."""
+    """View to edit an existing property and append new gallery images."""
     property_obj = get_object_or_404(Property, pk=pk)
 
     if request.method == 'POST':
-        # instance=property_obj tells Django to update, not create new
         form = PropertyForm(request.POST, request.FILES, instance=property_obj)
         if form.is_valid():
-            form.save()
+            # Save the updated main property
+            updated_property = form.save()
+
+            # Catch any newly uploaded extra files when editing
+            extra_images = request.FILES.getlist('gallery_images')
+            for image in extra_images:
+                PropertyImage.objects.create(property=updated_property, image=image)
+
             messages.success(request, f"Success! '{property_obj.title}' was updated.")
             return redirect('custom_dashboard')
     else:
         form = PropertyForm(instance=property_obj)
 
-    return render(request, 'add_property.html', {'form': form, 'is_edit': True})
+    return render(request, 'add_property.html', {'form': form, 'is_edit': True, 'property': property_obj})
 
 
 def delete_property(request, pk):
@@ -152,10 +158,3 @@ def delete_property(request, pk):
         property_obj.delete()
         messages.success(request, "Listing successfully deleted.")
     return redirect('custom_dashboard')
-
-from django.shortcuts import get_object_or_404
-
-def property_detail(request, pk):
-    # Fetch the exact property using its Primary Key (pk/id)
-    property_obj = get_object_or_404(Property, pk=pk)
-    return render(request, 'property_detail.html', {'property': property_obj})

@@ -137,38 +137,90 @@
 </section>
 
 <!-- 3. DEALERS IN: QUICK SERVICE SNAPSHOT -->
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 md:px-8">
+<!-- 3. COMPREHENSIVE SOLUTIONS: EXACT SERVICES (Parallax Background) -->
+<section class="relative py-24 bg-fixed bg-center bg-cover bg-no-repeat" style="background-image: url('/static/images/estate3.png');">
+
+    <!-- Dark overlay to ensure text is readable over the image -->
+    <div class="absolute inset-0 bg-gray-900/90 z-0"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-8">
+
+        <!-- Header -->
         <div class="text-center mb-16">
-            <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Comprehensive Solutions</h2>
-            <div class="w-24 h-1 bg-red-600 mx-auto rounded-full"></div>
+            <span class="text-green-500 font-bold text-xs uppercase tracking-widest block mb-2 font-sans">What We Do</span>
+            <h2 class="font-serif text-4xl md:text-5xl font-extrabold text-white mb-4">Comprehensive Solutions</h2>
+            <div class="w-24 h-1 bg-red-600 mx-auto rounded-full mt-4"></div>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div class="text-center group">
-                <div class="w-20 h-20 mx-auto bg-gray-50 rounded-2xl flex items-center justify-center mb-4 border border-gray-100 group-hover:bg-red-600 group-hover:shadow-lg transition duration-300 transform group-hover:-translate-y-2">
-                    <i class="fa-solid fa-house-chimney-user text-3xl text-green-600 group-hover:text-white transition"></i>
+        <!-- 6-Grid Services Layout based on JAPMET Company Profile -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- Service 1: Property Management -->
+            <div class="bg-white p-8 rounded-2xl shadow-xl hover:-translate-y-2 transition duration-300 group border-b-4 border-transparent hover:border-red-600 flex flex-col items-center text-center">
+                <div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-green-600 transition duration-300 shadow-sm">
+                    <i class="fa-solid fa-house-chimney-user text-2xl text-green-600 group-hover:text-white transition duration-300"></i>
                 </div>
-                <h3 class="font-bold text-gray-900">Tenant Management</h3>
+                <h3 class="font-serif text-xl font-bold text-gray-900 mb-3">Property Management</h3>
+                <p class="font-sans text-gray-600 text-sm leading-relaxed">
+                    Efficient handling of residential and commercial properties using modern systems.
+                </p>
             </div>
-            <div class="text-center group">
-                <div class="w-20 h-20 mx-auto bg-gray-50 rounded-2xl flex items-center justify-center mb-4 border border-gray-100 group-hover:bg-red-600 group-hover:shadow-lg transition duration-300 transform group-hover:-translate-y-2">
-                    <i class="fa-solid fa-chart-pie text-3xl text-green-600 group-hover:text-white transition"></i>
+
+            <!-- Service 2: Sales and Leasing -->
+            <div class="bg-white p-8 rounded-2xl shadow-xl hover:-translate-y-2 transition duration-300 group border-b-4 border-transparent hover:border-red-600 flex flex-col items-center text-center">
+                <div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-green-600 transition duration-300 shadow-sm">
+                    <i class="fa-solid fa-handshake text-2xl text-green-600 group-hover:text-white transition duration-300"></i>
                 </div>
-                <h3 class="font-bold text-gray-900">Valuation Services</h3>
+                <h3 class="font-serif text-xl font-bold text-gray-900 mb-3">Sales and Leasing</h3>
+                <p class="font-sans text-gray-600 text-sm leading-relaxed">
+                    Comprehensive marketing and transaction support for buyers, sellers, and tenants.
+                </p>
             </div>
-            <div class="text-center group">
-                <div class="w-20 h-20 mx-auto bg-gray-50 rounded-2xl flex items-center justify-center mb-4 border border-gray-100 group-hover:bg-red-600 group-hover:shadow-lg transition duration-300 transform group-hover:-translate-y-2">
-                    <i class="fa-solid fa-helmet-safety text-3xl text-green-600 group-hover:text-white transition"></i>
+
+            <!-- Service 3: Letting Services -->
+            <div class="bg-white p-8 rounded-2xl shadow-xl hover:-translate-y-2 transition duration-300 group border-b-4 border-transparent hover:border-red-600 flex flex-col items-center text-center">
+                <div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-green-600 transition duration-300 shadow-sm">
+                    <i class="fa-solid fa-key text-2xl text-green-600 group-hover:text-white transition duration-300"></i>
                 </div>
-                <h3 class="font-bold text-gray-900">Construction & Dev</h3>
+                <h3 class="font-serif text-xl font-bold text-gray-900 mb-3">Letting Services</h3>
+                <p class="font-sans text-gray-600 text-sm leading-relaxed">
+                    Matching tenants with suitable residential and commercial spaces.
+                </p>
             </div>
-            <div class="text-center group">
-                <div class="w-20 h-20 mx-auto bg-gray-50 rounded-2xl flex items-center justify-center mb-4 border border-gray-100 group-hover:bg-red-600 group-hover:shadow-lg transition duration-300 transform group-hover:-translate-y-2">
-                    <i class="fa-solid fa-file-signature text-3xl text-green-600 group-hover:text-white transition"></i>
+
+            <!-- Service 4: Valuation & Advisory -->
+            <div class="bg-white p-8 rounded-2xl shadow-xl hover:-translate-y-2 transition duration-300 group border-b-4 border-transparent hover:border-red-600 flex flex-col items-center text-center">
+                <div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-green-600 transition duration-300 shadow-sm">
+                    <i class="fa-solid fa-chart-pie text-2xl text-green-600 group-hover:text-white transition duration-300"></i>
                 </div>
-                <h3 class="font-bold text-gray-900">Buying & Selling</h3>
+                <h3 class="font-serif text-xl font-bold text-gray-900 mb-3">Valuation & Advisory.</h3>
+                <p class="font-sans text-gray-600 text-sm leading-relaxed">
+                    Accurate valuation services and investment guidance.
+                </p>
             </div>
+
+            <!-- Service 5: Real Estate Consultancy -->
+            <div class="bg-white p-8 rounded-2xl shadow-xl hover:-translate-y-2 transition duration-300 group border-b-4 border-transparent hover:border-red-600 flex flex-col items-center text-center">
+                <div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-green-600 transition duration-300 shadow-sm">
+                    <i class="fa-solid fa-lightbulb text-2xl text-green-600 group-hover:text-white transition duration-300"></i>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-gray-900 mb-3">Real Estate Consultancy.</h3>
+                <p class="font-sans text-gray-600 text-sm leading-relaxed">
+                    Strategic advice including feasibility studies and project planning.
+                </p>
+            </div>
+
+            <!-- Service 6: Research -->
+            <div class="bg-white p-8 rounded-2xl shadow-xl hover:-translate-y-2 transition duration-300 group border-b-4 border-transparent hover:border-red-600 flex flex-col items-center text-center">
+                <div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-green-600 transition duration-300 shadow-sm">
+                    <i class="fa-solid fa-magnifying-glass-chart text-2xl text-green-600 group-hover:text-white transition duration-300"></i>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-gray-900 mb-3">Research.</h3>
+                <p class="font-sans text-gray-600 text-sm leading-relaxed">
+                    Market insights and reports to guide decision-making.
+                </p>
+            </div>
+
         </div>
     </div>
 </section>
@@ -239,20 +291,112 @@
 
     </div>
 </section>
+<!-- 6. FREQUENTLY ASKED QUESTIONS (Fixed Background Parallax) -->
+<section class="relative py-24 bg-fixed bg-center bg-cover bg-no-repeat font-sans" style="background-image: url('/static/images/estate1.png');">
 
+    <!-- Dark overlay to ensure text is readable over the image -->
+    <div class="absolute inset-0 bg-gray-900/85 z-0"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-8">
+
+        <!-- Header -->
+        <div class="text-center mb-16">
+            <span class="text-red-500 font-bold text-xs uppercase tracking-widest block mb-2">Got Questions?</span>
+            <h2 class="text-3xl md:text-5xl font-serif font-bold text-white mb-4">Frequently Asked Questions</h2>
+            <div class="w-24 h-1 bg-green-500 mx-auto mt-4 rounded-full shadow-lg border-b border-green-400"></div>
+        </div>
+
+        <!-- FAQ Accordion Container -->
+        <div class="space-y-4">
+
+            <!-- FAQ Item 1 -->
+            <details class="group bg-white/95 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden border-l-4 border-red-600 cursor-pointer open:bg-white transition-all duration-300">
+                <summary class="p-6 font-bold text-gray-900 text-lg flex justify-between items-center group-hover:text-green-700 transition">
+                    What services does JAPAL Property Management offer?
+                    <span class="transition duration-300 group-open:rotate-180">
+                        <i class="fa-solid fa-chevron-down text-red-600"></i>
+                    </span>
+                </summary>
+                <div class="px-6 pb-6 text-gray-700 leading-relaxed border-t border-gray-100 pt-4">
+                    We specialize in property management, sales and leasing, valuation & advisory, letting services, and real estate consultancy[cite: 1].
+                </div>
+            </details>
+
+            <!-- FAQ Item 2 -->
+            <details class="group bg-white/95 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden border-l-4 border-green-600 cursor-pointer open:bg-white transition-all duration-300">
+                <summary class="p-6 font-bold text-gray-900 text-lg flex justify-between items-center group-hover:text-red-600 transition">
+                    Where are your offices located?
+                    <span class="transition duration-300 group-open:rotate-180">
+                        <i class="fa-solid fa-chevron-down text-green-600"></i>
+                    </span>
+                </summary>
+                <div class="px-6 pb-6 text-gray-700 leading-relaxed border-t border-gray-100 pt-4">
+                    Our headquarters is located in Machakos Town at the Sartaj Building, and we have regional branches in Nairobi, Malindi, and Mombasa[cite: 1].
+                </div>
+            </details>
+
+            <!-- FAQ Item 3 -->
+            <details class="group bg-white/95 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden border-l-4 border-red-600 cursor-pointer open:bg-white transition-all duration-300">
+                <summary class="p-6 font-bold text-gray-900 text-lg flex justify-between items-center group-hover:text-green-700 transition">
+                    Why should I choose JAPAL to manage my property?
+                    <span class="transition duration-300 group-open:rotate-180">
+                        <i class="fa-solid fa-chevron-down text-red-600"></i>
+                    </span>
+                </summary>
+                <div class="px-6 pb-6 text-gray-700 leading-relaxed border-t border-gray-100 pt-4">
+                    Established in 2001, we bring over two decades of trusted experience to the table[cite: 1]. We utilize technology-driven operations, including cloud-based property management systems, to provide highly professional and personalized service[cite: 1].
+                </div>
+            </details>
+
+            <!-- FAQ Item 4 -->
+            <details class="group bg-white/95 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden border-l-4 border-green-600 cursor-pointer open:bg-white transition-all duration-300">
+                <summary class="p-6 font-bold text-gray-900 text-lg flex justify-between items-center group-hover:text-red-600 transition">
+                    Do you handle both residential and commercial properties?
+                    <span class="transition duration-300 group-open:rotate-180">
+                        <i class="fa-solid fa-chevron-down text-green-600"></i>
+                    </span>
+                </summary>
+                <div class="px-6 pb-6 text-gray-700 leading-relaxed border-t border-gray-100 pt-4">
+                    Yes, our clientele includes individual property owners, developers, and corporate organizations[cite: 1]. We expertly handle everything from residential apartments and villas to large retail malls and office complexes[cite: 1].
+                </div>
+            </details>
+
+            <!-- FAQ Item 5 -->
+            <details class="group bg-white/95 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden border-l-4 border-red-600 cursor-pointer open:bg-white transition-all duration-300">
+                <summary class="p-6 font-bold text-gray-900 text-lg flex justify-between items-center group-hover:text-green-700 transition">
+                    How can I get in touch with your team?
+                    <span class="transition duration-300 group-open:rotate-180">
+                        <i class="fa-solid fa-chevron-down text-red-600"></i>
+                    </span>
+                </summary>
+                <div class="px-6 pb-6 text-gray-700 leading-relaxed border-t border-gray-100 pt-4">
+                    You can reach us directly at +254 722 891658 or +254 726 580 464, or email us at japalmanagers@gmail.com[cite: 1].
+                </div>
+            </details>
+
+        </div>
+    </div>
+</section>
 <!-- 5. NEWSLETTER / FOOTER CTA -->
-<section class="py-24 relative overflow-hidden">
+<!-- 5. NEWSLETTER / FOOTER CTA -->
+<section class="py-12 relative overflow-hidden font-sans">
     <div class="absolute inset-0 z-0">
         <img src="/static/images/worksite.png" class="w-full h-full object-cover opacity-20">
-        <div class="absolute inset-0 bg-green-900/95"></div>
+        <!-- Vibrant green matching the JAPAL logo -->
+        <div class="absolute inset-0 bg-green-600/90"></div>
     </div>
-    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
-        <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Stay Ahead in Real Estate</h2>
-        <p class="text-green-100 text-lg mb-10">Subscribe to our newsletter for exclusive property listings, investment insights, and market trends.</p>
 
-        <form class="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
-            <input type="email" placeholder="Enter your email address" required class="flex-grow px-6 py-4 rounded-full focus:outline-none focus:ring-4 focus:ring-red-500/50 shadow-inner text-gray-900">
-            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-full shadow-lg transition duration-300 whitespace-nowrap">
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+        <!-- Reduced margins and applied clean fonts -->
+        <h2 class="text-2xl md:text-4xl font-bold text-white mb-3">Stay Ahead in Real Estate</h2>
+        <p class="text-white/90 text-base md:text-lg mb-6">Subscribe to our newsletter for exclusive property listings, investment insights, and market trends.</p>
+
+        <!-- Compacted form sizing -->
+        <form class="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
+            <!-- Explicitly set bg-white here -->
+            <input type="email" placeholder="Enter your email address" required class="flex-grow px-6 py-3 rounded-full bg-white focus:outline-none focus:ring-4 focus:ring-red-500/50 shadow-inner text-gray-900 font-medium">
+
+            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 whitespace-nowrap">
                 Subscribe Now
             </button>
         </form>

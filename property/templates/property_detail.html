@@ -6,10 +6,10 @@
 <!-- 1. HEADER & BREADCRUMBS -->
 <section class="pt-32 pb-8 bg-gray-50 border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-4 md:px-8">
-        <a href="{% url 'home' %}" class="text-gray-500 hover:text-red-600 font-bold mb-6 inline-flex items-center transition duration-300">
+        <a href="{% url 'propertylisting' %}" class="text-gray-500 hover:text-red-600 font-bold mb-6 inline-flex items-center transition duration-300">
             <i class="fa-solid fa-arrow-left mr-2"></i> Back to Properties
         </a>
-        
+
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
             <div>
                 <div class="flex items-center gap-3 mb-2">
@@ -20,13 +20,13 @@
                         {{ property.get_property_type_display }}
                     </span>
                 </div>
-                <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-2">{{ property.title }}</h1>
-                <p class="text-gray-500 text-lg"><i class="fa-solid fa-location-dot text-red-600 mr-2"></i>{{ property.location }}</p>
+                <h1 class="font-serif text-3xl md:text-5xl font-extrabold text-gray-900 mb-2">{{ property.title }}</h1>
+                <p class="font-serif text-gray-500 text-lg"><i class="fa-solid fa-location-dot text-red-600 mr-2"></i>{{ property.location }}</p>
             </div>
-            
+
             <div class="text-left md:text-right">
                 <p class="text-gray-500 font-bold uppercase tracking-wide text-xs mb-1">Asking Price</p>
-                <p class="text-green-600 font-black text-3xl md:text-4xl">KES {{ property.price }}</p>
+                <p class="font-serif text-green-600 font-black text-3xl md:text-4xl">KES {{ property.price }}</p>
             </div>
         </div>
     </div>
@@ -35,53 +35,91 @@
 <!-- 2. MAIN CONTENT AREA -->
 <section class="py-12 bg-white">
     <div class="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-3 gap-12">
-        
+
         <!-- Left Column: Images & Details -->
         <div class="lg:col-span-2">
-            
-            <!-- Main Image -->
-            <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-100 mb-8 h-[400px] md:h-[500px] bg-gray-100">
-                {% if property.main_image %}
-                    <img src="{{ property.main_image.url }}" alt="{{ property.title }}" class="w-full h-full object-cover">
-                {% else %}
-                    <div class="w-full h-full flex items-center justify-center">
-                        <i class="fa-solid fa-building text-6xl text-gray-300"></i>
+
+            <!-- ========================================== -->
+            <!-- DYNAMIC IMAGE GALLERY CAROUSEL             -->
+            <!-- ========================================== -->
+            <div class="relative rounded-2xl overflow-hidden shadow-lg border border-gray-100 mb-8 h-[400px] md:h-[500px] bg-gray-900 group" id="property-carousel">
+
+                <!-- Slides Container -->
+                <div id="carousel-slides" class="w-full h-full relative">
+
+                    <!-- Slide 1: Main Image -->
+                    {% if property.main_image %}
+                        <div class="carousel-slide absolute inset-0 transition-opacity duration-500 opacity-100 z-10">
+                            <img src="{{ property.main_image.url }}" alt="{{ property.title }} - Main" class="w-full h-full object-cover">
+                        </div>
+                    {% endif %}
+
+                    <!-- Slides 2+: Extra Gallery Images -->
+                    {% for img in gallery_images %}
+                        <!-- Hidden by default using opacity-0 and pointer-events-none -->
+                        <div class="carousel-slide absolute inset-0 transition-opacity duration-500 opacity-0 pointer-events-none z-0">
+                            <img src="{{ img.image.url }}" alt="{{ property.title }} - Gallery" class="w-full h-full object-cover">
+                        </div>
+                    {% endfor %}
+
+                    <!-- Fallback if absolutely no images exist -->
+                    {% if not property.main_image and not gallery_images %}
+                        <div class="w-full h-full flex items-center justify-center bg-gray-100">
+                            <i class="fa-solid fa-building text-6xl text-gray-300"></i>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Navigation Controls (Only render if there are extra images) -->
+                {% if gallery_images %}
+                    <!-- Left Arrow -->
+                    <button id="prev-slide" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-red-600 hover:text-white text-gray-900 w-12 h-12 rounded-full flex items-center justify-center shadow-xl transition duration-300 opacity-0 group-hover:opacity-100 z-20">
+                        <i class="fa-solid fa-chevron-left text-xl"></i>
+                    </button>
+                    <!-- Right Arrow -->
+                    <button id="next-slide" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-red-600 hover:text-white text-gray-900 w-12 h-12 rounded-full flex items-center justify-center shadow-xl transition duration-300 opacity-0 group-hover:opacity-100 z-20">
+                        <i class="fa-solid fa-chevron-right text-xl"></i>
+                    </button>
+
+                    <!-- Image Counter -->
+                    <div class="absolute bottom-4 right-4 bg-gray-900/80 text-white text-xs font-bold px-4 py-2 rounded-full z-20 backdrop-blur-sm border border-gray-700 shadow-lg">
+                        <i class="fa-solid fa-camera mr-2"></i><span id="current-slide-num">1</span> / <span id="total-slides">{{ gallery_images|length|add:"1" }}</span>
                     </div>
                 {% endif %}
             </div>
+            <!-- ========================================== -->
 
             <!-- Quick Specs Bar -->
             <div class="flex flex-wrap justify-around bg-gray-50 p-6 rounded-xl border border-gray-200 mb-8">
                 <div class="text-center">
                     <i class="fa-solid fa-bed text-2xl text-green-600 mb-2"></i>
                     <p class="text-gray-500 text-sm font-bold uppercase">Bedrooms</p>
-                    <p class="text-xl font-black text-gray-900">{{ property.bedrooms }}</p>
+                    <p class="font-serif text-xl font-black text-gray-900">{{ property.bedrooms }}</p>
                 </div>
                 <div class="text-center">
                     <i class="fa-solid fa-shower text-2xl text-green-600 mb-2"></i>
                     <p class="text-gray-500 text-sm font-bold uppercase">Bathrooms</p>
-                    <p class="text-xl font-black text-gray-900">{{ property.bathrooms }}</p>
+                    <p class="font-serif text-xl font-black text-gray-900">{{ property.bathrooms }}</p>
                 </div>
                 <div class="text-center">
                     <i class="fa-solid fa-car text-2xl text-green-600 mb-2"></i>
                     <p class="text-gray-500 text-sm font-bold uppercase">Parking</p>
-                    <p class="text-xl font-black text-gray-900">{{ property.parking_spaces }}</p>
+                    <p class="font-serif text-xl font-black text-gray-900">{{ property.parking_spaces }}</p>
                 </div>
             </div>
 
             <!-- Description -->
             <div class="mb-12">
-                <h3 class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-red-600 pb-2 inline-block">Property Description</h3>
-                <!-- The linebreaks filter ensures paragraphs format correctly from the database -->
-                <p class="text-gray-600 leading-relaxed text-lg">{{ property.description|linebreaks }}</p>
+                <h3 class="font-serif text-2xl font-bold text-gray-900 mb-4 border-b-2 border-red-600 pb-2 inline-block">Property Description</h3>
+                <p class="font-serif text-gray-600 leading-relaxed text-lg">{{ property.description|linebreaks }}</p>
             </div>
 
             <!-- Amenities -->
             {% if property.amenities %}
             <div class="mb-12">
-                <h3 class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-red-600 pb-2 inline-block">Features & Amenities</h3>
+                <h3 class="font-serif text-2xl font-bold text-gray-900 mb-4 border-b-2 border-red-600 pb-2 inline-block">Features & Amenities</h3>
                 <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
-                    <p class="text-gray-700 font-medium leading-relaxed">{{ property.amenities }}</p>
+                    <p class="font-serif text-gray-700 font-medium leading-relaxed">{{ property.amenities }}</p>
                 </div>
             </div>
             {% endif %}
@@ -92,16 +130,16 @@
         <div class="lg:col-span-1">
             <!-- Sticky Container -->
             <div class="sticky top-32 space-y-8">
-                
+
                 <!-- Contact Agent Card -->
                 <div class="bg-white p-6 rounded-2xl shadow-xl border border-gray-200">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Interested in this property?</h3>
+                    <h3 class="font-serif text-xl font-bold text-gray-900 mb-4">Interested in this property?</h3>
                     <p class="text-gray-500 text-sm mb-6">Contact JAPAL Property Management today to schedule a viewing or request more information.</p>
-                    
+
                     <a href="https://wa.me/254722891658?text=Hello%20JAPAL,%20I%20am%20interested%20in%20the%20property:%20{{ property.title }}" target="_blank" class="w-full block text-center bg-[#25D366] text-white font-bold py-3 rounded-lg hover:bg-green-600 transition shadow-md mb-4">
                         <i class="fa-brands fa-whatsapp text-lg mr-2"></i> Chat on WhatsApp
                     </a>
-                    
+
                     <div class="flex items-center justify-center gap-2 text-gray-600 font-bold mb-4">
                         <span class="w-8 h-px bg-gray-300"></span> OR <span class="w-8 h-px bg-gray-300"></span>
                     </div>
@@ -123,4 +161,48 @@
 
     </div>
 </section>
+
+<!-- ========================================== -->
+<!-- JAVASCRIPT FOR IMAGE CAROUSEL LOGIC        -->
+<!-- ========================================== -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const slides = document.querySelectorAll('.carousel-slide');
+
+        // If there's only 1 image (or none), stop the script to save resources
+        if (slides.length <= 1) return;
+
+        let currentIndex = 0;
+        const prevBtn = document.getElementById('prev-slide');
+        const nextBtn = document.getElementById('next-slide');
+        const counter = document.getElementById('current-slide-num');
+
+        // Function to handle the fading transition
+        function updateCarousel(newIndex) {
+            // Hide the current slide
+            slides[currentIndex].classList.remove('opacity-100', 'z-10');
+            slides[currentIndex].classList.add('opacity-0', 'pointer-events-none', 'z-0');
+
+            // Show the new slide
+            currentIndex = newIndex;
+            slides[currentIndex].classList.remove('opacity-0', 'pointer-events-none', 'z-0');
+            slides[currentIndex].classList.add('opacity-100', 'z-10');
+
+            // Update the counter
+            if (counter) counter.innerText = currentIndex + 1;
+        }
+
+        // Next Button Click
+        nextBtn.addEventListener('click', function() {
+            let newIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
+            updateCarousel(newIndex);
+        });
+
+        // Prev Button Click
+        prevBtn.addEventListener('click', function() {
+            let newIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
+            updateCarousel(newIndex);
+        });
+    });
+</script>
 {% endblock %}
