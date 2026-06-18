@@ -3,130 +3,131 @@
 {% block title %}Contact Us - JAPAL Property Management{% endblock %}
 
 {% block content %}
-<!-- 1. CONTACT PAGE HERO -->
-<section class="bg-gray-900 py-16">
-    <div class="max-w-7xl mx-auto px-4 md:px-8 text-center">
-        <h1 class="text-4xl font-bold text-white mb-4 tracking-tight">Get in Touch</h1>
-        <p class="text-lg text-gray-300 max-w-2xl mx-auto">
+<!-- 1. CONTACT PAGE HERO (Parallax & Serif Typography) -->
+<section class="relative bg-gray-900 text-white pt-40 pb-24 bg-fixed bg-center bg-cover bg-no-repeat font-serif" style="background-image: url('/static/images/directors.png');">
+    <!-- Dark Gradient Overlay for text readability -->
+    <div class="absolute inset-0 bg-gray-900/85 z-0"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-8 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tight text-white">Get in Touch</h1>
+        <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto italic border-b border-red-600 pb-6 inline-block">
             Whether you are looking for an amazing space to rent or need professional management for your property, we are here to help.
         </p>
     </div>
 </section>
 
 <!-- 2. MAIN CONTACT SECTION (Split Grid) -->
-<section class="py-16 bg-gray-50">
+<section class="py-16 bg-gray-50 font-sans">
     <div class="max-w-7xl mx-auto px-4 md:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white rounded-2xl shadow-xl overflow-hidden">
-            
-            <!-- LEFT COLUMN: Contact Details & Map -->
-            <div class="bg-emerald-900 text-white p-8 md:p-12 flex flex-col justify-between">
-                <div>
-                    <h2 class="text-3xl font-bold mb-6">Contact Information</h2>
-                    <p class="text-emerald-100 mb-8 leading-relaxed">
-                        Reach out to our dedicated team for inquiries regarding property management, valuation, or available listings.
-                    </p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+
+            <!-- LEFT COLUMN: Contact Details & Map (JAPAL RED) -->
+            <div class="bg-red-700 text-white p-8 md:p-12 flex flex-col justify-between relative overflow-hidden">
+                <!-- Subtle background accent -->
+                <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-red-900/40 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="relative z-10">
+                    <h2 class="text-3xl font-bold mb-6 font-serif">Contact Information</h2>
+
 
                     <ul class="space-y-6 mb-10">
                         <!-- Phone -->
                         <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 bg-emerald-800 rounded-full flex items-center justify-center shrink-0">
-                                <i class="fa-solid fa-phone text-emerald-400"></i>
+                            <div class="w-10 h-10 bg-red-800 rounded-full flex items-center justify-center shrink-0 border border-red-600">
+                                <i class="fa-solid fa-phone text-white"></i>
                             </div>
                             <div>
                                 <h4 class="font-semibold text-lg">Call Us</h4>
-                                <p class="text-emerald-100">0722891658</p>
-                                <p class="text-emerald-100">0726580464</p>
+                                <p class="text-red-100">+254 722 891658</p>
+                                <p class="text-red-100">+254 726 580 464</p>
                             </div>
                         </li>
                         <!-- Email -->
                         <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 bg-emerald-800 rounded-full flex items-center justify-center shrink-0">
-                                <i class="fa-solid fa-envelope text-emerald-400"></i>
+                            <div class="w-10 h-10 bg-red-800 rounded-full flex items-center justify-center shrink-0 border border-red-600">
+                                <i class="fa-solid fa-envelope text-white"></i>
                             </div>
                             <div>
                                 <h4 class="font-semibold text-lg">Email Us</h4>
-                                <p class="text-emerald-100">info@japalproperties.com</p>
+                                <a href="mailto:japalmanagers@gmail.com" class="text-red-100 hover:text-white transition">japalmanagers@gmail.com</a>
                             </div>
                         </li>
                         <!-- Office Location -->
                         <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 bg-emerald-800 rounded-full flex items-center justify-center shrink-0">
-                                <i class="fa-solid fa-location-dot text-emerald-400"></i>
+                            <div class="w-10 h-10 bg-red-800 rounded-full flex items-center justify-center shrink-0 border border-red-600">
+                                <i class="fa-solid fa-location-dot text-white"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-lg">Office Location</h4>
-                                <p class="text-emerald-100">Near Massmart Supermarket</p>
+                                <h4 class="font-semibold text-lg">Headquarters</h4>
+                                <p class="text-red-100">Sartaj Building, 5th floor</p>
+                                <p class="text-red-100">Machakos Town</p>
+                                <p class="text-red-200 text-sm mt-1">P.O BOX 1537 - 90100</p>
                             </div>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Google Map Embed -->
-                <div class="w-full h-64 rounded-xl overflow-hidden border-2 border-emerald-700 shadow-inner">
+                <div class="w-full h-64 rounded-xl overflow-hidden border-2 border-red-800 shadow-inner relative z-10">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.421348447661!2d37.26382319999999!3d-1.5162387!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f80d1f524353b%3A0x6b701724a9b2eb8c!2sMassmart%20Supermarket!5e0!3m2!1sen!2ske!4v1781029088578!5m2!1sen!2ske" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
 
-            <!-- RIGHT COLUMN: Contact Form -->
+            <!-- RIGHT COLUMN: WhatsApp Form -->
             <div class="p-8 md:p-12">
-                <h3 class="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h3>
-                
-                <!-- 
-                  Note: The form action is set to handle the submission via your views.py.
-                  Your backend logic will capture these fields and use Django's core.mail 
-                  to send the payload to info@japalproperties.com.
-                -->
-                <form action="{% url 'contact' %}" method="POST" class="space-y-6">
-                    {% csrf_token %}
-                    
+                <h3 class="text-3xl font-bold text-gray-900 mb-8 font-serif">Send Us a Message</h3>
+
+                <!-- Replaced Django Form with JavaScript-handled Form -->
+                <form id="whatsapp-form" class="space-y-6">
+
                     <!-- Name Fields -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="first_name" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-                            <input type="text" id="first_name" name="first_name" required class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none transition shadow-sm" placeholder="John">
+                            <label for="first_name" class="block text-sm font-semibold text-gray-700 mb-1">First Name</label>
+                            <input type="text" id="first_name" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:ring-2 focus:ring-red-600 focus:border-red-600 outline-none transition shadow-sm" placeholder="John">
                         </div>
                         <div>
-                            <label for="last_name" class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-                            <input type="text" id="last_name" name="last_name" required class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none transition shadow-sm" placeholder="Doe">
+                            <label for="last_name" class="block text-sm font-semibold text-gray-700 mb-1">Last Name</label>
+                            <input type="text" id="last_name" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:ring-2 focus:ring-red-600 focus:border-red-600 outline-none transition shadow-sm" placeholder="Hassan">
                         </div>
                     </div>
 
                     <!-- Contact Info Fields -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none transition shadow-sm" placeholder="john@example.com">
+                            <label for="email" class="block text-sm font-semibold text-gray-700 mb-1">Email Address</label>
+                            <input type="email" id="email" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:ring-2 focus:ring-red-600 focus:border-red-600 outline-none transition shadow-sm" placeholder="john@example.com">
                         </div>
                         <div>
-                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none transition shadow-sm" placeholder="07XX XXX XXX">
+                            <label for="phone" class="block text-sm font-semibold text-gray-700 mb-1">Phone Number</label>
+                            <input type="tel" id="phone" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:ring-2 focus:ring-red-600 focus:border-red-600 outline-none transition shadow-sm" placeholder="07XX XXX XXX">
                         </div>
                     </div>
 
-                    <!-- Inquiry Type (Crucial for Property Management routing) -->
+                    <!-- Inquiry Type -->
                     <div>
-                        <label for="inquiry_type" class="block text-sm font-medium text-gray-700 mb-1">I am interested in...</label>
-                        <select id="inquiry_type" name="inquiry_type" required class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none transition shadow-sm bg-white">
+                        <label for="inquiry_type" class="block text-sm font-semibold text-gray-700 mb-1">I am interested in...</label>
+                        <select id="inquiry_type" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:ring-2 focus:ring-red-600 focus:border-red-600 outline-none transition shadow-sm">
                             <option value="" disabled selected>Select an option</option>
-                            <option value="management">Property Management Services</option>
-                            <option value="renting">Renting a Property</option>
-                            <option value="buying_selling">Buying or Selling Property</option>
-                            <option value="valuation">Valuation Services</option>
-                            <option value="other">Other Inquiry</option>
+                            <option value="Property Management Services">Property Management Services</option>
+                            <option value="Renting a Property">Renting a Property</option>
+                            <option value="Buying or Selling Property">Buying or Selling Property</option>
+                            <option value="Valuation Services">Valuation Services</option>
+                            <option value="Other Inquiry">Other Inquiry</option>
                         </select>
                     </div>
 
                     <!-- Message Field -->
                     <div>
-                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
-                        <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none transition shadow-sm" placeholder="How can we help you?"></textarea>
+                        <label for="message" class="block text-sm font-semibold text-gray-700 mb-1">Your Message</label>
+                        <textarea id="message" rows="5" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:ring-2 focus:ring-red-600 focus:border-red-600 outline-none transition shadow-sm resize-none" placeholder="How can we help you?"></textarea>
                     </div>
 
-                    <!-- Submit Button -->
-                    <div>
-                        <button type="submit" class="w-full bg-emerald-600 text-white font-bold py-4 px-8 rounded-lg hover:bg-emerald-700 hover:shadow-lg transition duration-300 flex justify-center items-center gap-2">
-                            <span>Send Message</span>
-                            <i class="fa-solid fa-paper-plane"></i>
+                    <!-- Submit Button (WhatsApp Styling) -->
+                    <div class="pt-2">
+                        <button type="submit" class="w-full bg-[#25D366] text-white font-bold py-4 px-8 rounded-lg hover:bg-[#128C7E] shadow-md hover:shadow-xl transition duration-300 flex justify-center items-center gap-3">
+                            <span>Send via WhatsApp</span>
+                            <i class="fa-brands fa-whatsapp text-xl"></i>
                         </button>
                     </div>
                 </form>
@@ -135,4 +136,33 @@
         </div>
     </div>
 </section>
+
+<!-- JavaScript to handle the WhatsApp redirection -->
+<script>
+    document.getElementById('whatsapp-form').addEventListener('submit', function(event) {
+        // Prevent the form from reloading the page
+        event.preventDefault();
+
+        // Grab all the values the user typed
+        const firstName = document.getElementById('first_name').value;
+        const lastName = document.getElementById('last_name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const inquiryType = document.getElementById('inquiry_type').value;
+        const message = document.getElementById('message').value;
+
+        // Format it into a clean WhatsApp text (using * for bold text in WhatsApp)
+        const whatsappText = `*New Website Inquiry*\n\n*Name:* ${firstName} ${lastName}\n*Phone:* ${phone}\n*Email:* ${email}\n*Interested In:* ${inquiryType}\n\n*Message:*\n${message}`;
+
+        // Convert it to a URL-friendly format
+        const encodedText = encodeURIComponent(whatsappText);
+
+        // Your WhatsApp Number (Country code 254 + the rest of the number)
+        const whatsappNumber = "254726580464";
+
+        // Open WhatsApp!
+        const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedText}`;
+        window.open(whatsappURL, '_blank');
+    });
+</script>
 {% endblock %}
