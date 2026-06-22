@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views  # Add this import!
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -16,4 +17,14 @@ urlpatterns = [
 
 # ADD THIS EXACT LINE HERE:
     path('properties/<int:pk>/', views.property_detail, name='property_detail'),
+# Admin Authentication URLs
+    path('management-hub/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('management-hub/logout/', auth_views.LogoutView.as_view(), name='logout'),
+
+path('insights/', views.blog_list, name='blog_list'),
+    path('insights/<slug:slug>/', views.blog_detail, name='blog_detail'),
+
+path('management-hub/blog/add/', views.add_blog, name='add_blog'),
+    path('management-hub/blog/edit/<int:pk>/', views.edit_blog, name='edit_blog'),
+    path('management-hub/blog/delete/<int:pk>/', views.delete_blog, name='delete_blog'),
 ]

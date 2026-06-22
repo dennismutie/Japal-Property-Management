@@ -5,31 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}JAPAL Property Management Company Limited{% endblock %}</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     {% block extra_head %}{% endblock %}
 </head>
-<!-- FIX 1: Removed pb-20 from the body tag so the white background stops at the footer -->
 <body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen relative">
 
-    <div class="fixed bottom-24 md:bottom-8 left-4 z-50 flex flex-col gap-3">
-        <a href="https://wa.me/254722891658" target="_blank" class="bg-[#25D366] text-white px-4 py-2 rounded-full font-bold text-xs shadow-lg shadow-green-900/20 hover:bg-green-500 transition flex items-center gap-2 w-max border border-green-400">
-            <i class="fa-brands fa-whatsapp text-lg"></i> WHATSAPP
-        </a>
-        <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="opacity-0 translate-y-4 pointer-events-none transition-all duration-300 bg-gray-900 text-white px-4 py-2 rounded-full font-bold text-xs shadow-lg hover:bg-gray-800 flex items-center gap-2 w-max border border-gray-700">
-            <i class="fa-solid fa-arrow-up"></i> TOP
-        </button>
-    </div>
+  <!-- WhatsApp & Top Buttons (Modern, Compact, Icon-Only) -->
+<div class="fixed bottom-24 md:bottom-8 left-4 z-50 flex flex-col gap-3">
 
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/254722891658" target="_blank" class="w-12 h-12 bg-[#25D366] text-white rounded-xl shadow-lg shadow-green-900/20 hover:bg-green-500 transition flex items-center justify-center border border-green-400" aria-label="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp text-2xl"></i>
+    </a>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="opacity-0 translate-y-4 pointer-events-none transition-all duration-300 w-12 h-12 bg-gray-900 text-white rounded-xl shadow-lg hover:bg-gray-800 flex items-center justify-center border border-gray-700" aria-label="Back to Top">
+        <i class="fa-solid fa-arrow-up text-xl"></i>
+    </button>
+
+</div>
+
+    <!-- Top Contact Bar -->
     <div id="top-bar" class="hidden md:flex absolute top-0 left-0 w-full z-50 bg-green-600 text-white text-xs py-2 px-8 justify-between items-center gap-2 shadow-md">
         <div class="flex items-center gap-4 font-medium tracking-wide">
+            <span><i class="fa-solid fa-location-dot mr-1 text-green-200"></i> Sartaj Building, 5th floor Machakos Town</span>
             <span><i class="fa-solid fa-phone mr-1 text-green-200"></i> 0722891658 / 0726580464</span>
             <span><i class="fa-solid fa-envelope mr-1 text-green-200"></i> info@japalproperties.com</span>
         </div>
         <div class="italic tracking-wide">
-            "To lead the future of global real estate"
+            "A Partner you can Trust"
         </div>
     </div>
 
+    <!-- DESKTOP NAVIGATION -->
     <header id="main-nav" class="fixed top-0 left-0 w-full z-40 md:mt-10 transition-all duration-500 ease-in-out pointer-events-none">
         <div class="max-w-7xl mx-auto px-4 md:px-8 flex justify-center md:justify-between items-center gap-4 mt-2 md:mt-0">
 
@@ -37,39 +45,48 @@
                 <img src="/static/images/japal_logo.png" alt="JAPAL Property Management" class="h-12 md:h-16 w-auto object-contain">
             </a>
 
-            <nav class="hidden pointer-events-auto md:flex flex-wrap items-center justify-center gap-3 w-auto text-sm font-bold tracking-wide text-gray-800 uppercase">
-                <a href="{% url 'home' %}" class="bg-white px-5 py-3 shadow-xl border-b-2 border-transparent hover:border-red-600 hover:text-red-600 transition transform hover:-translate-y-1 duration-300">Home</a>
-                <a href="{% url 'about' %}" class="bg-white px-5 py-3 shadow-xl border-b-2 border-transparent hover:border-red-600 hover:text-red-600 transition transform hover:-translate-y-1 duration-300">About Us</a>
-                <a href="{% url 'services' %}" class="bg-white px-5 py-3 shadow-xl border-b-2 border-transparent hover:border-red-600 hover:text-red-600 transition transform hover:-translate-y-1 duration-300">Services</a>
-                <a href="{% url 'propertylisting' %}" class="bg-white px-5 py-3 shadow-xl border-b-2 border-transparent hover:border-red-600 hover:text-red-600 transition transform hover:-translate-y-1 duration-300">Listings</a>
-                <a href="{% url 'contact' %}" class="bg-white px-5 py-3 shadow-xl border-b-2 border-transparent hover:border-red-600 hover:text-red-600 transition transform hover:-translate-y-1 duration-300">Contact</a>
+            <nav class="hidden pointer-events-auto md:flex flex-wrap items-center justify-center gap-2 lg:gap-3 w-auto text-sm font-bold tracking-wide text-gray-800 uppercase">
+                <a href="{% url 'home' %}" class="bg-white px-4 lg:px-5 py-3 shadow-xl border-b-2 border-transparent hover:border-red-600 hover:text-red-600 transition transform hover:-translate-y-1 duration-300">Home</a>
+                <a href="{% url 'about' %}" class="bg-white px-4 lg:px-5 py-3 shadow-xl border-b-2 border-transparent hover:border-red-600 hover:text-red-600 transition transform hover:-translate-y-1 duration-300">About Us</a>
+                <a href="{% url 'services' %}" class="bg-white px-4 lg:px-5 py-3 shadow-xl border-b-2 border-transparent hover:border-red-600 hover:text-red-600 transition transform hover:-translate-y-1 duration-300">Services</a>
+                <a href="{% url 'propertylisting' %}" class="bg-white px-4 lg:px-5 py-3 shadow-xl border-b-2 border-transparent hover:border-red-600 hover:text-red-600 transition transform hover:-translate-y-1 duration-300">Listings</a>
+                <!-- Added Blog/Insights Link Here -->
+                <a href="{% url 'blog_list' %}" class="bg-white px-4 lg:px-5 py-3 shadow-xl border-b-2 border-transparent hover:border-red-600 hover:text-red-600 transition transform hover:-translate-y-1 duration-300">Insights</a>
+                <a href="{% url 'contact' %}" class="bg-white px-4 lg:px-5 py-3 shadow-xl border-b-2 border-transparent hover:border-red-600 hover:text-red-600 transition transform hover:-translate-y-1 duration-300">Contact</a>
             </nav>
         </div>
     </header>
 
-    <nav class="flex md:hidden fixed bottom-0 left-0 w-full bg-white z-[99] border-t border-gray-200 justify-around items-center px-2 py-3 shadow-[0_-4px_15px_rgba(0,0,0,0.15)] pb-safe">
+    <!-- MOBILE NAVIGATION -->
+    <nav class="flex md:hidden fixed bottom-0 left-0 w-full bg-white z-[99] border-t border-gray-200 justify-around items-center px-1 py-3 shadow-[0_-4px_15px_rgba(0,0,0,0.15)] pb-safe">
         <a href="{% url 'home' %}" class="flex flex-col items-center text-gray-500 hover:text-red-600 transition w-full text-center">
-            <i class="fa-solid fa-house text-xl mb-1"></i>
-            <span class="text-[10px] font-bold tracking-wide uppercase">Home</span>
+            <i class="fa-solid fa-house text-lg mb-1"></i>
+            <span class="text-[9px] font-bold tracking-wide uppercase">Home</span>
         </a>
         <a href="{% url 'about' %}" class="flex flex-col items-center text-gray-500 hover:text-red-600 transition w-full text-center">
-            <i class="fa-solid fa-users text-xl mb-1"></i>
-            <span class="text-[10px] font-bold tracking-wide uppercase">About</span>
+            <i class="fa-solid fa-users text-lg mb-1"></i>
+            <span class="text-[9px] font-bold tracking-wide uppercase">About</span>
         </a>
         <a href="{% url 'services' %}" class="flex flex-col items-center text-gray-500 hover:text-red-600 transition w-full text-center">
-            <i class="fa-solid fa-briefcase text-xl mb-1"></i>
-            <span class="text-[10px] font-bold tracking-wide uppercase">Services</span>
+            <i class="fa-solid fa-briefcase text-lg mb-1"></i>
+            <span class="text-[9px] font-bold tracking-wide uppercase">Services</span>
         </a>
         <a href="{% url 'propertylisting' %}" class="flex flex-col items-center text-gray-500 hover:text-red-600 transition w-full text-center">
-            <i class="fa-solid fa-building text-xl mb-1"></i>
-            <span class="text-[10px] font-bold tracking-wide uppercase">Listings</span>
+            <i class="fa-solid fa-building text-lg mb-1"></i>
+            <span class="text-[9px] font-bold tracking-wide uppercase">Listings</span>
+        </a>
+        <!-- Added Blog/Insights Link Here -->
+        <a href="{% url 'blog_list' %}" class="flex flex-col items-center text-gray-500 hover:text-red-600 transition w-full text-center">
+            <i class="fa-solid fa-newspaper text-lg mb-1"></i>
+            <span class="text-[9px] font-bold tracking-wide uppercase">Insights</span>
         </a>
         <a href="{% url 'contact' %}" class="flex flex-col items-center text-gray-500 hover:text-red-600 transition w-full text-center">
-            <i class="fa-solid fa-address-book text-xl mb-1"></i>
-            <span class="text-[10px] font-bold tracking-wide uppercase">Contact</span>
+            <i class="fa-solid fa-address-book text-lg mb-1"></i>
+            <span class="text-[9px] font-bold tracking-wide uppercase">Contact</span>
         </a>
     </nav>
 
+    <!-- Global Messages -->
     {% if messages %}
         <div class="fixed top-24 left-0 w-full z-50 pointer-events-none">
             <div class="max-w-7xl mx-auto px-4 pointer-events-auto">
@@ -82,67 +99,98 @@
         </div>
     {% endif %}
 
+    <!-- Main Content -->
     <main class="flex-grow relative z-10">
         {% block content %}
         {% endblock %}
     </main>
 
-    <!-- FIX 2: Added pb-24 (padding bottom) to the footer on mobile so the dark background stretches behind the nav bar -->
-    <footer class="bg-gray-900 text-gray-300 pt-16 pb-24 md:pb-6 border-t-4 border-green-600 mt-auto relative z-20">
-        <div class="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+    <!-- Footer -->
+<footer class="bg-[#1a1a1a] text-gray-300 pt-16 border-t-4 border-green-600 mt-auto relative z-20 font-sans">
 
-            <div>
-                <img src="/static/images/japal_logo.png" alt="JAPAL Logo" class="h-12 bg-white p-2 rounded-none mb-6 object-contain">
-                <p class="text-sm text-gray-400 leading-relaxed mb-6">
-                    Delivering exceptional value for investors and occupiers through innovative, technology-driven, and sustainable solutions.
-                </p>
-                <div class="text-sm font-semibold text-green-500">
-                    Integrity • Equality • Accountability
-                </div>
-            </div>
+    <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 
-            <div class="md:pl-12">
-                <h3 class="text-white font-bold text-lg mb-6 tracking-wider uppercase border-b border-gray-700 pb-2 inline-block">Quick Explore</h3>
-                <ul class="space-y-3 text-sm">
-                    <li><a href="{% url 'about' %}" class="hover:text-red-500 transition flex items-center group"><i class="fa-solid fa-chevron-right text-xs text-green-500 mr-3 transform group-hover:translate-x-1 transition"></i>Our Pillars & Mission</a></li>
-                    <li><a href="{% url 'services' %}" class="hover:text-red-500 transition flex items-center group"><i class="fa-solid fa-chevron-right text-xs text-green-500 mr-3 transform group-hover:translate-x-1 transition"></i>Management Services</a></li>
-                    <li><a href="{% url 'propertylisting' %}" class="hover:text-red-500 transition flex items-center group"><i class="fa-solid fa-chevron-right text-xs text-green-500 mr-3 transform group-hover:translate-x-1 transition"></i>Browse Properties</a></li>
-                </ul>
-            </div>
+        <!-- Column 1: Corporate Identity & Contact -->
+        <div class="lg:pr-6">
+            <h2 class="text-white font-serif text-xl font-bold mb-4 uppercase tracking-wide">JAPAL Property Management</h2>
+            <p class="text-sm text-gray-400 leading-relaxed mb-6">
+                Delivering exceptional value through innovative, technology-driven, and sustainable real estate solutions.
+            </p>
+            <ul class="space-y-4 text-sm text-gray-400">
 
-            <div>
-                <h3 class="text-white font-bold text-lg mb-6 tracking-wider uppercase border-b border-gray-700 pb-2 inline-block">Get In Touch</h3>
-                <ul class="space-y-4 text-sm text-gray-400">
-                    <li class="flex items-start gap-4">
-                        <div class="bg-gray-800 p-2 rounded-none shrink-0">
-                            <i class="fa-solid fa-phone text-green-500"></i>
-                        </div>
-                        <div class="pt-1">
-                            <p class="text-gray-200 font-medium hover:text-white transition">0722891658</p>
-                            <p class="text-gray-200 font-medium hover:text-white transition">0726580464</p>
-                        </div>
-                    </li>
-                    <li class="flex items-center gap-4">
-                        <div class="bg-gray-800 p-2 rounded-none shrink-0">
-                            <i class="fa-solid fa-envelope text-green-500"></i>
-                        </div>
-                        <a href="mailto:info@japalproperties.com" class="text-gray-200 font-medium hover:text-red-500 transition">info@japalproperties.com</a>
-                    </li>
-                </ul>
-            </div>
+                <li class="flex items-start gap-3">
+                    <i class="fa-solid fa-phone text-red-600 mt-1 w-4"></i>
+                    <span>+254 722 891658 <br> +254 726 580 464</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <i class="fa-solid fa-envelope text-red-600 mt-1 w-4"></i>
+                    <a href="mailto:info@japalproperties.com" class="hover:text-white transition">info@japalproperties.com</a>
+                </li>
+            </ul>
         </div>
 
-        <div class="max-w-7xl mx-auto px-4 md:px-8 pt-6 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-            <div class="text-center md:text-left">&copy; {% now "Y" %} JAPAL Property Management Company Limited. All Rights Reserved.</div>
-
-            <div class="flex gap-4 text-sm">
-                <!-- Corrected spelling to Brightline Creations based on your screenshot -->
-                <a href="https://wa.me/254711238972?text=Hello,%20I%20am%20interested%20in%20having%20a%20website%20built." target="_blank" class="text-gray-400 hover:text-[#25D366] transition flex items-center gap-2 font-semibold">
-                    Built by Brightline Creations 
-                </a>
-            </div>
+        <!-- Column 2: For Property Owners (Investors/Landlords) -->
+        <div>
+            <h3 class="text-white font-bold text-sm mb-6 tracking-widest uppercase border-b border-gray-800 pb-2">For Property Owners</h3>
+            <ul class="space-y-3 text-sm text-gray-400">
+                <li><a href="{% url 'services' %}" class="hover:text-red-500 transition flex items-center group"><i class="fa-solid fa-chevron-right text-[10px] text-green-600 mr-3 transform group-hover:translate-x-1 transition"></i> Comprehensive Property Management</a></li>
+                <li><a href="{% url 'services' %}" class="hover:text-red-500 transition flex items-center group"><i class="fa-solid fa-chevron-right text-[10px] text-green-600 mr-3 transform group-hover:translate-x-1 transition"></i> Valuation & Advisory</a></li>
+                <li><a href="{% url 'services' %}" class="hover:text-red-500 transition flex items-center group"><i class="fa-solid fa-chevron-right text-[10px] text-green-600 mr-3 transform group-hover:translate-x-1 transition"></i> Real Estate Consultancy</a></li>
+                <li><a href="{% url 'contact' %}" class="hover:text-red-500 transition flex items-center group"><i class="fa-solid fa-chevron-right text-[10px] text-green-600 mr-3 transform group-hover:translate-x-1 transition"></i> Request a Consultation</a></li>
+            </ul>
         </div>
-    </footer>
+
+        <!-- Column 3: For Tenants & Buyers -->
+        <div>
+            <h3 class="text-white font-bold text-sm mb-6 tracking-widest uppercase border-b border-gray-800 pb-2">For Tenants & Buyers</h3>
+            <ul class="space-y-3 text-sm text-gray-400">
+                <li><a href="{% url 'propertylisting' %}" class="hover:text-red-500 transition flex items-center group"><i class="fa-solid fa-chevron-right text-[10px] text-green-600 mr-3 transform group-hover:translate-x-1 transition"></i> Browse Available Properties</a></li>
+                <li><a href="{% url 'services' %}" class="hover:text-red-500 transition flex items-center group"><i class="fa-solid fa-chevron-right text-[10px] text-green-600 mr-3 transform group-hover:translate-x-1 transition"></i> Sales and Leasing</a></li>
+                <li><a href="{% url 'services' %}" class="hover:text-red-500 transition flex items-center group"><i class="fa-solid fa-chevron-right text-[10px] text-green-600 mr-3 transform group-hover:translate-x-1 transition"></i> Letting Services</a></li>
+                <li><a href="{% url 'blog_list' %}" class="hover:text-red-500 transition flex items-center group"><i class="fa-solid fa-chevron-right text-[10px] text-green-600 mr-3 transform group-hover:translate-x-1 transition"></i> Read Market Insights</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 4: Newsletter -->
+        <div>
+            <h3 class="text-white font-bold text-sm mb-6 tracking-widest uppercase border-b border-gray-800 pb-2">Market Intelligence</h3>
+            <p class="text-sm text-gray-400 mb-6 leading-relaxed">
+                Stay ahead of the Kenyan real estate market. Subscribe to receive exclusive property alerts, investment reports, and industry news directly to your inbox.
+            </p>
+
+            <!-- WhatsApp Newsletter Form -->
+            <form onsubmit="event.preventDefault(); window.open('https://wa.me/254722891658?text=Hello%20JAPAL,%20please%20add%20my%20email%20address%20(' + this.email.value + ')%20to%20your%20mailing%20list.', '_blank');" class="flex flex-col gap-3 w-full">
+                <input type="email" name="email" placeholder="Enter your email address" required class="w-full bg-[#111111] border border-gray-700 text-gray-300 px-4 py-3 focus:outline-none focus:border-red-600 transition text-sm font-medium placeholder-gray-600">
+                <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-3 text-sm transition duration-300 uppercase tracking-wide">
+                    Subscribe Now
+                </button>
+            </form>
+
+
+        </div>
+
+    </div>
+
+    <!-- Bottom Copyright Bar -->
+    <!-- Changed py-6 to pt-6 pb-24 md:pb-6 to prevent mobile nav overlap -->
+    <div class="bg-[#0a0a0a] pt-6 pb-24 md:pb-6 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+
+            <div class="text-center md:text-left font-medium tracking-wide">
+                &copy; {% now "Y" %} JAPAL Property Management Company Limited. All Rights Reserved.
+            </div>
+
+            <div class="flex gap-4 text-sm mt-2 md:mt-0">
+                <span>Website Developed by |
+                    <a href="https://wa.me/254711238972?text=Hello,%20I%20am%20interested%20in%20having%20a%20website%20built." target="_blank" class="text-[#25D366] font-bold tracking-wide hover:text-green-400 transition">
+                        Brightline Creations
+                    </a>
+                </span>
+            </div>
+
+        </div>
+    </div>
+</footer>
 
     {% block extra_js %}{% endblock %}
 
@@ -151,7 +199,6 @@
             const mainNav = document.getElementById('main-nav');
             const backToTopBtn = document.getElementById('back-to-top');
 
-            // --- 1. Back to Top Button Logic ---
             if (window.scrollY > 300) {
                 backToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
                 backToTopBtn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
@@ -160,7 +207,6 @@
                 backToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
             }
 
-            // --- 2. Floating Navbar Logic ---
             if (window.innerWidth >= 768) {
                 if (window.scrollY > 40) {
                     mainNav.classList.remove('md:mt-10');

@@ -7,112 +7,298 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans pb-24">
+<body class="bg-gray-50 text-gray-800 font-sans pb-24 antialiased">
 
     <!-- App-Like Top Navbar -->
-    <header class="bg-gray-900 text-white sticky top-0 z-50 shadow-md">
-        <div class="px-4 py-4 flex justify-between items-center">
+    <header class="bg-gray-900 text-white sticky top-0 z-50 shadow-md border-b border-gray-800">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="w-8 h-8 bg-red-600 rounded flex items-center justify-center font-bold">J</div>
-                <h1 class="font-bold tracking-wide">Management Hub</h1>
+                <div class="w-9 h-9 bg-red-600 text-white rounded-xl flex items-center justify-center font-serif font-black text-xl shadow-md shadow-red-900/30">J</div>
+                <div>
+                    <h1 class="font-bold tracking-wide text-base md:text-lg">Management Hub</h1>
+                    <p class="text-[10px] text-gray-400 font-medium tracking-wider uppercase hidden sm:block">Control Panel</p>
+                </div>
             </div>
-            <a href="{% url 'home' %}" class="text-gray-400 hover:text-white text-sm flex items-center gap-2">
-                <i class="fa-solid fa-earth-africa"></i> <span class="hidden md:inline">View Site</span>
+            <a href="{% url 'home' %}" class="bg-gray-800 hover:bg-gray-700 text-gray-200 hover:text-white px-3 py-2 rounded-lg text-xs md:text-sm font-semibold flex items-center gap-2 border border-gray-700 transition duration-300">
+                <i class="fa-solid fa-earth-africa text-red-500"></i> <span>View Live Site</span>
             </a>
         </div>
     </header>
-    <!-- Dashboard Success Messages -->
+
+    <!-- Dashboard Success / Error Messages -->
     {% if messages %}
-        <div class="max-w-5xl mx-auto px-4 mt-4">
+        <div id="admin-message-container" class="max-w-5xl mx-auto px-4 mt-6 transition-all duration-500 ease-out">
             {% for message in messages %}
-                <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-sm mb-2">
-                    <span class="block sm:inline font-bold">{{ message }}</span>
+                <div class="bg-green-50 border-l-4 border-green-500 text-green-800 p-4 rounded-xl shadow-sm flex justify-between items-center mb-2" role="alert">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-circle-check text-green-600 text-lg"></i>
+                        <span class="font-medium text-sm md:text-base">{{ message }}</span>
+                    </div>
+                    <button onclick="document.getElementById('admin-message-container').remove()"
+                            class="text-green-700 hover:text-green-900 hover:bg-green-200/40 rounded-lg p-1 px-2 font-bold text-xl transition leading-none outline-none ml-4">
+                        &times;
+                    </button>
                 </div>
             {% endfor %}
         </div>
+
+        <script>
+            setTimeout(function() {
+                let msgBox = document.getElementById('admin-message-container');
+                if (msgBox) {
+                    msgBox.style.opacity = '0';
+                    setTimeout(function() {
+                        msgBox.remove();
+                    }, 500);
+                }
+            }, 4000);
+        </script>
     {% endif %}
 
-    <!-- Quick Stats Overview -->
+    <!-- Quick Stats Overview (4 Columns Grid Setup) -->
     <div class="px-4 pt-6 pb-2 max-w-5xl mx-auto">
-        <div class="grid grid-cols-3 gap-3">
-            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 text-center">
-                <p class="text-xs text-gray-500 font-bold uppercase mb-1">Total</p>
-                <p class="text-2xl font-black text-gray-900">{{ total_properties }}</p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4">
+
+            <!-- Total Stats Card -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between group hover:shadow-md transition duration-300">
+                <div class="space-y-1">
+                    <p class="text-[10px] md:text-xs text-gray-400 font-bold uppercase tracking-wider">Properties</p>
+                    <p class="text-2xl md:text-3xl font-black text-gray-900">{{ total_properties }}</p>
+                </div>
+                <div class="w-10 h-10 bg-gray-50 text-gray-600 rounded-xl flex items-center justify-center text-md border border-gray-100">
+                    <i class="fa-solid fa-building"></i>
+                </div>
             </div>
-            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 text-center">
-                <p class="text-xs text-gray-500 font-bold uppercase mb-1">Rentals</p>
-                <p class="text-2xl font-black text-green-600">{{ active_rentals }}</p>
+
+            <!-- Rentals Stats Card -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between group hover:shadow-md transition duration-300">
+                <div class="space-y-1">
+                    <p class="text-[10px] md:text-xs text-gray-400 font-bold uppercase tracking-wider">Rentals</p>
+                    <p class="text-2xl md:text-3xl font-black text-green-600">{{ active_rentals }}</p>
+                </div>
+                <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center text-md border border-green-100">
+                    <i class="fa-solid fa-key"></i>
+                </div>
             </div>
-            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 text-center">
-                <p class="text-xs text-gray-500 font-bold uppercase mb-1">For Sale</p>
-                <p class="text-2xl font-black text-blue-600">{{ active_sales }}</p>
+
+            <!-- For Sale Stats Card -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between group hover:shadow-md transition duration-300">
+                <div class="space-y-1">
+                    <p class="text-[10px] md:text-xs text-gray-400 font-bold uppercase tracking-wider">For Sale</p>
+                    <p class="text-2xl md:text-3xl font-black text-blue-600">{{ active_sales }}</p>
+                </div>
+                <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-md border border-blue-100">
+                    <i class="fa-solid fa-handshake"></i>
+                </div>
             </div>
+
+            <!-- Blog Insights Count Card -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between group hover:shadow-md transition duration-300">
+                <div class="space-y-1">
+                    <p class="text-[10px] md:text-xs text-gray-400 font-bold uppercase tracking-wider">Articles</p>
+                    <p class="text-2xl md:text-3xl font-black text-red-600">{{ total_posts|default:0 }}</p>
+                </div>
+                <div class="w-10 h-10 bg-red-50 text-red-600 rounded-xl flex items-center justify-center text-md border border-red-100">
+                    <i class="fa-solid fa-pen-nib"></i>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <!-- Properties List -->
-    <div class="px-4 py-6 max-w-5xl mx-auto">
-        <div class="flex justify-between items-end mb-4">
-            <h2 class="text-lg font-bold text-gray-800">Your Properties</h2>
+    <!-- Interactive Management Menu Selection Bar -->
+    <div class="px-4 mt-6 max-w-5xl mx-auto">
+        <div class="bg-white p-1.5 rounded-xl border border-gray-200 shadow-sm flex gap-2">
+            <button onclick="switchTab('properties')" id="btn-tab-properties" class="flex-1 text-center font-bold text-xs md:text-sm py-2.5 rounded-lg bg-gray-900 text-white shadow transition-all duration-300 cursor-pointer">
+                <i class="fa-solid fa-house mr-1.5"></i> Manage Properties
+            </button>
+            <button onclick="switchTab('blogs')" id="btn-tab-blogs" class="flex-1 text-center font-bold text-xs md:text-sm py-2.5 rounded-lg bg-transparent text-gray-500 hover:text-gray-900 transition-all duration-300 cursor-pointer">
+                <i class="fa-solid fa-newspaper mr-1.5"></i> Manage Blog Insights
+            </button>
+        </div>
+    </div>
+
+    <!-- PANEL A: PROPERTIES CONFIGURATION SECTION -->
+    <div id="panel-properties" class="px-4 py-6 max-w-5xl mx-auto block">
+        <div class="flex justify-between items-center mb-6 border-b border-gray-200 pb-3">
+            <h2 class="text-xl font-bold text-gray-900 font-serif">Your Live Properties</h2>
+            <span class="bg-gray-200 text-gray-700 text-xs font-bold px-2.5 py-1 rounded-full">{{ properties|length }} Published</span>
         </div>
 
         <div class="space-y-4">
             {% for property in properties %}
-                <!-- Mobile-First List Card -->
-                <div class="bg-white p-3 rounded-xl shadow-sm border border-gray-200 flex items-center gap-4 relative overflow-hidden">
-                    <!-- Color strip for status -->
-                    <div class="absolute left-0 top-0 bottom-0 w-1 {% if property.status == 'RENT' %}bg-green-500{% else %}bg-blue-500{% endif %}"></div>
+                <div class="bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition duration-300 border border-gray-100 flex flex-col sm:flex-row sm:items-center gap-4 relative overflow-hidden group">
+                    <div class="absolute left-0 top-0 bottom-0 w-1.5 {% if property.status == 'RENT' %}bg-green-500{% else %}bg-blue-500{% endif %}"></div>
 
-                    <!-- Thumbnail -->
-                    <div class="w-20 h-20 rounded-lg bg-gray-200 shrink-0 overflow-hidden ml-1">
+                    <div class="w-full sm:w-24 h-40 sm:h-24 rounded-xl bg-gray-100 shrink-0 overflow-hidden relative border border-gray-100">
                         {% if property.main_image %}
-                            <img src="{{ property.main_image.url }}" class="w-full h-full object-cover">
+                            <img src="{{ property.main_image.url }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         {% else %}
-                            <i class="fa-solid fa-image text-gray-400 w-full h-full flex items-center justify-center"></i>
+                            <div class="w-full h-full flex flex-col items-center justify-center text-gray-400 gap-1 bg-gray-50">
+                                <i class="fa-solid fa-image text-xl"></i>
+                                <span class="text-[9px] font-bold uppercase tracking-wider">No Image</span>
+                            </div>
                         {% endif %}
                     </div>
 
-                    <!-- Info -->
-                  <!-- Info & Action Buttons -->
-                    <div class="flex-grow min-w-0 flex flex-col justify-between">
+                    <div class="flex-grow min-w-0 flex flex-col justify-between h-full space-y-3 sm:space-y-1">
                         <div>
-                            <div class="flex justify-between items-start mb-1">
-                                <h3 class="font-bold text-gray-900 text-sm truncate pr-2">{{ property.title }}</h3>
-                                <span class="text-[10px] font-bold px-2 py-0.5 rounded {% if property.status == 'RENT' %}bg-green-100 text-green-700{% else %}bg-blue-100 text-blue-700{% endif %}">
+                            <div class="flex items-start justify-between gap-2 mb-1">
+                                <h3 class="font-bold text-gray-900 text-base md:text-lg truncate group-hover:text-red-600 transition">{{ property.title }}</h3>
+                                <span class="text-[10px] md:text-xs font-black tracking-wider uppercase px-2.5 py-0.5 rounded-full shrink-0 shadow-sm {% if property.status == 'RENT' %}bg-green-100 text-green-800 border border-green-200{% else %}bg-blue-100 text-blue-800 border border-blue-200{% endif %}">
                                     {{ property.status }}
                                 </span>
                             </div>
-                            <p class="text-xs text-gray-500 truncate mb-1"><i class="fa-solid fa-location-dot mr-1"></i>{{ property.location }}</p>
-                            <p class="text-sm font-black text-red-600">KES {{ property.price }}</p>
+                            <p class="text-xs md:text-sm text-gray-500 truncate flex items-center gap-1.5">
+                                <i class="fa-solid fa-location-dot text-red-500 shrink-0"></i>
+                                <span>{{ property.location }}</span>
+                            </p>
                         </div>
 
-                        <!-- Action Buttons (Edit / Delete) -->
-                        <div class="flex gap-4 mt-2 pt-2 border-t border-gray-100">
-                            <a href="{% url 'edit_property' property.id %}" class="text-blue-600 hover:text-blue-800 text-xs font-bold transition flex items-center gap-1">
-                                <i class="fa-solid fa-pen"></i> Edit
-                            </a>
-                            <!-- Using a form for delete is a secure Django standard -->
-                            <form method="POST" action="{% url 'delete_property' property.id %}" onsubmit="return confirm('Are you sure you want to permanently delete this listing?');" class="inline">
-                                {% csrf_token %}
-                                <button type="submit" class="text-red-600 hover:text-red-800 text-xs font-bold transition flex items-center gap-1">
-                                    <i class="fa-solid fa-trash"></i> Delete
-                                </button>
-                            </form>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 sm:pt-1 border-t border-gray-50">
+                            <p class="text-base md:text-lg font-black text-red-600 flex items-baseline gap-0.5">
+                                <span class="text-xs font-bold tracking-tight mr-0.5">KES</span>{{ property.price }}
+                            </p>
+
+                            <div class="flex items-center gap-3 self-end sm:self-auto">
+                                <a href="{% url 'edit_property' property.id %}" class="bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border border-blue-100">
+                                    <i class="fa-solid fa-pen text-[10px]"></i> Edit Listing
+                                </a>
+                                <form method="POST" action="{% url 'delete_property' property.id %}" onsubmit="return confirm('Are you sure you want to permanently delete this listing?');" class="inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="bg-red-50 text-red-600 hover:bg-red-600 hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border border-red-100 cursor-pointer">
+                                        <i class="fa-solid fa-trash text-[10px]"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             {% empty %}
-                <div class="text-center py-10 bg-white rounded-xl border border-dashed border-gray-300">
-                    <p class="text-gray-500">No properties posted yet.</p>
+                <div class="text-center py-16 bg-white rounded-2xl border-2 border-dashed border-gray-200 p-8 max-w-xl mx-auto">
+                    <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center text-2xl text-gray-400 mx-auto mb-4">
+                        <i class="fa-solid fa-house-laptop"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 text-lg mb-1">Your Inventory is Empty</h4>
+                    <p class="text-gray-500 text-sm mb-6">Get started by clicking the floating addition action button below to deploy your first property asset listing live.</p>
                 </div>
             {% endfor %}
         </div>
     </div>
 
-    <!-- Floating Action Button (FAB) to Add Property -->
-    <a href="{% url 'add_property' %}" class="fixed bottom-6 right-6 w-14 h-14 bg-red-600 text-white rounded-full flex items-center justify-center shadow-lg shadow-red-900/40 hover:bg-red-700 hover:scale-105 transition transform z-50">
-        <i class="fa-solid fa-plus text-xl"></i>
+    <!-- PANEL B: BLOG POSTS CONFIGURATION SECTION -->
+    <div id="panel-blogs" class="px-4 py-6 max-w-5xl mx-auto hidden">
+        <div class="flex justify-between items-center mb-6 border-b border-gray-200 pb-3">
+            <h2 class="text-xl font-bold text-gray-900 font-serif">Your Blog Publications</h2>
+            <span class="bg-gray-200 text-gray-700 text-xs font-bold px-2.5 py-1 rounded-full">{{ posts|length|default:0 }} Written</span>
+        </div>
+
+        <div class="space-y-4">
+            {% for post in posts %}
+                <div class="bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition duration-300 border border-gray-100 flex flex-col sm:flex-row sm:items-center gap-4 relative overflow-hidden group">
+                    <!-- Status border strip indicating visible draft layout status -->
+                    <div class="absolute left-0 top-0 bottom-0 w-1.5 {% if post.is_published %}bg-green-500{% else %}bg-amber-500{% endif %}"></div>
+
+                    <!-- Thumbnail Image View Container -->
+                    <div class="w-full sm:w-24 h-40 sm:h-24 rounded-xl bg-gray-100 shrink-0 overflow-hidden relative border border-gray-100">
+                        {% if post.thumbnail %}
+                            <img src="{{ post.thumbnail.url }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        {% else %}
+                            <div class="w-full h-full flex flex-col items-center justify-center text-gray-400 bg-gray-50">
+                                <i class="fa-solid fa-newspaper text-xl"></i>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Details Content Column Context -->
+                    <div class="flex-grow min-w-0 flex flex-col justify-between h-full space-y-3 sm:space-y-1">
+                        <div>
+                            <div class="flex items-start justify-between gap-2 mb-1">
+                                <h3 class="font-bold text-gray-900 text-base md:text-lg truncate group-hover:text-red-600 transition">{{ post.title }}</h3>
+                                <span class="text-[10px] md:text-xs font-black tracking-wider uppercase px-2.5 py-0.5 rounded-full shrink-0 shadow-sm {% if post.is_published %}bg-green-100 text-green-800 border border-green-200{% else %}bg-amber-100 text-amber-800 border border-amber-200{% endif %}">
+                                    {% if post.is_published %}Live{% else %}Draft{% endif %}
+                                </span>
+                            </div>
+                            <p class="text-xs text-gray-500 truncate flex items-center gap-1.5">
+                                <i class="fa-regular fa-calendar text-gray-400"></i>
+                                <span>{{ post.created_at|date:"M d, Y" }}</span>
+                            </p>
+                        </div>
+
+                        <!-- Panel Operations -->
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 sm:pt-1 border-t border-gray-50">
+                            <p class="text-xs text-gray-500 italic max-w-sm truncate">
+                                {{ post.summary }}
+                            </p>
+
+                            <div class="flex items-center gap-3 self-end sm:self-auto">
+                                <!-- Dynamic links to connect your custom blog urls -->
+                                <a href="{% url 'edit_blog' post.id %}" class="bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border border-blue-100">
+                                    <i class="fa-solid fa-pen text-[10px]"></i> Edit Post
+                                </a>
+                                <form method="POST" action="{% url 'delete_blog' post.id %}" onsubmit="return confirm('Are you sure you want to permanently delete this blog post?');" class="inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="bg-red-50 text-red-600 hover:bg-red-600 hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border border-red-100 cursor-pointer">
+                                        <i class="fa-solid fa-trash text-[10px]"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="text-center py-16 bg-white rounded-2xl border-2 border-dashed border-gray-200 p-8 max-w-xl mx-auto">
+                    <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center text-2xl text-gray-400 mx-auto mb-4">
+                        <i class="fa-solid fa-pen-fancy"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 text-lg mb-1">No Articles Written</h4>
+                    <p class="text-gray-500 text-sm mb-6">Switch content insights into motion by setting up your first public or draft real estate insights layout update.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Floating Action Button (FAB) -> Dynamically handles redirection routing context -->
+    <a href="{% url 'add_property' %}" id="floating-action-fab" class="fixed bottom-6 right-6 w-14 h-14 bg-red-600 hover:bg-green-600 text-white rounded-full flex items-center justify-center shadow-lg shadow-red-900/40 hover:shadow-xl hover:scale-110 transition duration-300 transform z-50 group" title="Add Item">
+        <i class="fa-solid fa-plus text-xl group-hover:rotate-90 transition duration-300"></i>
     </a>
+
+    <!-- Tab Navigation Core Engine Script Logic -->
+    <script>
+        function switchTab(targetTab) {
+            const propPanel = document.getElementById('panel-properties');
+            const blogPanel = document.getElementById('panel-blogs');
+            const propBtn = document.getElementById('btn-tab-properties');
+            const blogBtn = document.getElementById('btn-tab-blogs');
+            const dynamicFab = document.getElementById('floating-action-fab');
+
+            if (targetTab === 'properties') {
+                // Toggle lists visibility display settings
+                propPanel.classList.replace('hidden', 'block');
+                blogPanel.classList.replace('block', 'hidden');
+
+                // Adjust active navigation tab UI stylings
+                propBtn.className = "flex-1 text-center font-bold text-xs md:text-sm py-2.5 rounded-lg bg-gray-900 text-white shadow transition-all duration-300 cursor-pointer";
+                blogBtn.className = "flex-1 text-center font-bold text-xs md:text-sm py-2.5 rounded-lg bg-transparent text-gray-500 hover:text-gray-900 transition-all duration-300 cursor-pointer";
+
+                // Alter FAB configuration routes path to match property adding route link
+                dynamicFab.setAttribute('href', "{% url 'add_property' %}");
+                dynamicFab.setAttribute('title', "Add New Property");
+            } else {
+                // Toggle lists visibility display settings
+                blogPanel.classList.replace('hidden', 'block');
+                propPanel.classList.replace('block', 'hidden');
+
+                // Adjust active navigation tab UI stylings
+                blogBtn.className = "flex-1 text-center font-bold text-xs md:text-sm py-2.5 rounded-lg bg-gray-900 text-white shadow transition-all duration-300 cursor-pointer";
+                propBtn.className = "flex-1 text-center font-bold text-xs md:text-sm py-2.5 rounded-lg bg-transparent text-gray-500 hover:text-gray-900 transition-all duration-300 cursor-pointer";
+
+                // Alter FAB configuration routes path to match blog adding route link
+                dynamicFab.setAttribute('href', "{% url 'add_blog' %}");
+                dynamicFab.setAttribute('title', "Write New Blog Article");
+            }
+        }
+    </script>
 
 </body>
 </html>

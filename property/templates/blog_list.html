@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Market Insights & News - JAPAL Property Management{% endblock %}
+
+{% block content %}
+<!-- 1. HERO SECTION WITH IMAGE BACKGROUND -->
+<section class="relative bg-gray-900 py-24 md:py-32 flex items-center justify-center text-center px-4 overflow-hidden shadow-inner">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 z-0">
+        <img src="/static/images/plots.png" alt="Market Insights" class="w-full h-full object-cover opacity-30">
+        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-80"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 max-w-4xl mx-auto">
+        <div class="flex items-center justify-center gap-3 mb-4">
+            <div class="w-8 h-0.5 bg-red-600"></div>
+            <span class="text-red-500 font-bold text-sm uppercase tracking-widest block font-sans">Corporate News & Analysis</span>
+            <div class="w-8 h-0.5 bg-red-600"></div>
+        </div>
+        <h1 class="font-serif text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">Market Insights</h1>
+        <p class="text-gray-300 text-lg md:text-xl font-light max-w-2xl mx-auto">Expert perspectives, real estate trends, and investment guides from the JAPAL team.</p>
+    </div>
+</section>
+
+<!-- 2. BLOG GRID SECTION -->
+<section class="py-20 bg-gray-50 min-h-[50vh]">
+    <!-- max-w-6xl and generous padding creates the centered, premium feel -->
+    <div class="max-w-6xl mx-auto px-6 md:px-12">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
+
+            {% for post in posts %}
+            <!-- Sharp Card with Lift Animation -->
+            <a href="{% url 'blog_detail' post.slug %}" class="group block flex flex-col h-full bg-transparent transition-all duration-500 hover:-translate-y-2">
+
+                <!-- Image Container: Sharp corners, overflow hidden for zoom effect -->
+                <div class="relative h-64 overflow-hidden w-full bg-gray-200 shadow-sm group-hover:shadow-xl transition-shadow duration-500">
+                    {% if post.thumbnail %}
+                        <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out">
+                    {% else %}
+                        <div class="w-full h-full flex items-center justify-center text-gray-400 bg-gray-200">
+                            <i class="fa-solid fa-newspaper text-4xl"></i>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Content Container -->
+                <div class="pt-6 flex-grow flex flex-col">
+
+                    <!-- Meta Info matching the Simpl style -->
+                    <div class="flex items-center text-xs font-bold uppercase tracking-widest text-gray-500 mb-4">
+                        <div class="w-6 h-0.5 bg-red-600 mr-3"></div>
+                        <span class="text-red-600">Insights</span>
+                        <span class="mx-3 text-gray-300">•</span>
+                        <span>{{ post.created_at|date:"F j, Y" }}</span>
+                    </div>
+
+                    <!-- Article Title -->
+                    <h2 class="font-serif text-2xl font-bold text-gray-900 mb-4 group-hover:text-red-600 transition duration-300 leading-snug">
+                        {{ post.title }}
+                    </h2>
+
+                    <!-- Article Summary -->
+                    <p class="text-gray-600 text-sm leading-relaxed mb-8 line-clamp-3">
+                        {{ post.summary }}
+                    </p>
+
+                    <!-- Custom "Read More" split-button matching the reference -->
+                    <div class="mt-auto flex w-max border border-gray-200 group-hover:border-red-600 transition duration-300 bg-white shadow-sm">
+                        <span class="px-5 py-2.5 text-sm font-bold text-gray-700 group-hover:text-red-600 transition duration-300 uppercase tracking-wide">
+                            Read More
+                        </span>
+                        <span class="bg-red-600 text-white px-4 py-2.5 flex items-center justify-center transform group-hover:bg-gray-900 transition duration-300">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </div>
+
+                </div>
+            </a>
+            {% empty %}
+            <!-- Premium Empty State -->
+            <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center py-24 bg-white border border-gray-200 shadow-sm">
+                <i class="fa-solid fa-pen-nib text-5xl text-gray-300 mb-4"></i>
+                <h3 class="font-serif text-2xl font-bold text-gray-800 mb-2">Publications Coming Soon</h3>
+                <p class="text-gray-500">Our market research team is currently preparing our first insights. Check back shortly!</p>
+            </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+</section>
+{% endblock %}

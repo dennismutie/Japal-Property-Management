@@ -60,3 +60,37 @@ class PropertyImage(models.Model):
 
     def __str__(self):
         return f"Gallery Image for {self.property.title}"
+
+
+from django.contrib.auth.models import User
+from django.utils.text import slugify
+import uuid
+
+
+# ... (Keep your existing Property models up here) ...
+
+class BlogPost(models.Model):
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, blank=True, max_length=250)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    thumbnail = models.ImageField(upload_to='blog_images/')
+
+    # A short preview for the main blog page
+    summary = models.CharField(max_length=250, help_text="Short teaser for the blog card")
+
+    # The full article content
+    content = models.TextField()
+
+    is_published = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+            while BlogPost.objects.filter(slug=self.slug).exists():
+                self.slug = f"{slugify(self.title)}-{uuid.uuid4().hex[:4]}"
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title

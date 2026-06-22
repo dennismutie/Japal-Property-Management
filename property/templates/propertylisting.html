@@ -18,39 +18,55 @@
 <!-- 2. IN-PAGE SEARCH & FILTER BAR -->
 <section class="bg-white border-b border-gray-200 shadow-sm relative z-20">
     <div class="max-w-7xl mx-auto px-4 md:px-8 py-6">
-        <form action="{% url 'propertylisting' %}" method="GET" class="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
+        <!--
+           Change:
+           - Added 'sm:grid-cols-2' to split into two columns on tablets
+           - Kept 'md:grid-cols-5' for the desktop layout
+           - Added 'gap-3' to tighten the spacing slightly on smaller screens
+        -->
+        <form action="{% url 'propertylisting' %}" method="GET" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 items-end">
+
+            <!-- Location -->
             <div class="md:col-span-1">
-                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Location</label>
-                <input type="text" name="location" value="{{ current_location|default_if_none:'' }}" placeholder="e.g. Juja" class="w-full bg-gray-50 border border-gray-200 text-gray-900 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-red-600 transition">
+                <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wide mb-1">Location</label>
+                <input type="text" name="location" value="{{ current_location|default_if_none:'' }}" placeholder="e.g. Juja" class="w-full bg-gray-50 border border-gray-200 text-sm px-3 py-2.5 rounded focus:outline-none focus:ring-1 focus:ring-red-600 transition">
             </div>
+
+            <!-- Property Type -->
             <div class="md:col-span-1">
-                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Type</label>
-                <select name="type" class="w-full bg-gray-50 border border-gray-200 text-gray-900 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-red-600 transition">
+                <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wide mb-1">Type</label>
+                <select name="type" class="w-full bg-gray-50 border border-gray-200 text-sm px-3 py-2.5 rounded focus:outline-none focus:ring-1 focus:ring-red-600 transition">
                     <option value="">All Types</option>
-                    <option value="apartment">Apartment</option>
-                    <option value="commercial">Commercial Space</option>
-                    <option value="land">Land</option>
-                    <option value="townhouse">Townhouse</option>
+                    <option value="apartment" {% if current_type == 'apartment' %}selected{% endif %}>Apartment</option>
+                    <option value="commercial" {% if current_type == 'commercial' %}selected{% endif %}>Commercial</option>
+                    <option value="land" {% if current_type == 'land' %}selected{% endif %}>Land</option>
+                    <option value="townhouse" {% if current_type == 'townhouse' %}selected{% endif %}>Townhouse</option>
                 </select>
             </div>
+
+            <!-- Status -->
             <div class="md:col-span-1">
-                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Status</label>
-                <select name="status" class="w-full bg-gray-50 border border-gray-200 text-gray-900 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-red-600 transition">
+                <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wide mb-1">Status</label>
+                <select name="status" class="w-full bg-gray-50 border border-gray-200 text-sm px-3 py-2.5 rounded focus:outline-none focus:ring-1 focus:ring-red-600 transition">
                     <option value="">Any Status</option>
-                    <option value="rent">To Let</option>
-                    <option value="sale">For Sale</option>
+                    <option value="rent" {% if current_status == 'rent' %}selected{% endif %}>To Let</option>
+                    <option value="sale" {% if current_status == 'sale' %}selected{% endif %}>For Sale</option>
                 </select>
             </div>
+
+            <!-- Sort By -->
             <div class="md:col-span-1">
-                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Sort By</label>
-                <select name="sort" class="w-full bg-gray-50 border border-gray-200 text-gray-900 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-red-600 transition">
-                    <option value="newest">Newest First</option>
-                    <option value="price_low">Price: Low to High</option>
-                    <option value="price_high">Price: High to Low</option>
+                <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wide mb-1">Sort By</label>
+                <select name="sort" class="w-full bg-gray-50 border border-gray-200 text-sm px-3 py-2.5 rounded focus:outline-none focus:ring-1 focus:ring-red-600 transition">
+                    <option value="newest" {% if current_sort == 'newest' or not current_sort %}selected{% endif %}>Newest First</option>
+                    <option value="price_low" {% if current_sort == 'price_low' %}selected{% endif %}>Price: Low to High</option>
+                    <option value="price_high" {% if current_sort == 'price_high' %}selected{% endif %}>Price: High to Low</option>
                 </select>
             </div>
+
+            <!-- Action Button -->
             <div class="md:col-span-1">
-                <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded shadow transition">
+                <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 px-4 text-sm rounded shadow transition">
                     Update Search
                 </button>
             </div>
@@ -60,7 +76,7 @@
 
 <!-- 3. PROPERTY GRID -->
 <section class="py-16 bg-gray-50 min-h-[50vh]">
-    <div class="max-w-7xl mx-auto px-4 md:px-8">
+    <div class="max-w-6xl mx-auto px-4 md:px-8">
 
         <!-- Results Counter -->
         <div class="mb-8 flex justify-between items-center">
